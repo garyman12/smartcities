@@ -1,5 +1,5 @@
 import db from "../config/firebase";
-
+var ref = db.database().ref("users");
 var firebaseFunctions = function(){
 
 }
@@ -20,6 +20,15 @@ firebaseFunctions.prototype = {
         }).catch(function(error){
             console.log("User creation function threw error: ", error);
         })
+    },
+
+    authenticateUser(dataBlock){
+        ref.orderByChild('email').equalTo(dataBlock.email).on("value", function(snapshot) {
+            console.log(snapshot.val());
+            snapshot.forEach(function(data) {
+                console.log(data.key);
+            });
+        });
     }
 
 }
