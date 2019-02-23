@@ -1,5 +1,6 @@
 const express = require('express')
 var bodyParser = require('body-parser')
+var jwtFunctions = require('./functions/jwtFunctions.js')
 const app = express()
 
 

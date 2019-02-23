@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/jakkuthompson/smartcities#readme",
   "dependencies": {
-    "express.js": "^1.0.0"
+    "express.js": "^1.0.0",
+    "jsonwebtoken": "^8.5.0"
   }
 }
