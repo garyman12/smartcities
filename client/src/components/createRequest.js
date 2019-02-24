@@ -13,6 +13,9 @@ import Titleboard from "./titleboard";
 import axios from "axios";
 import "../css/dashboard.css";
 
+import firebase from "../firebase";
+import FileUploader from "react-firebase-file-uploader";
+
 const styles = theme => ({
   root: {
     width: "90%"
@@ -35,7 +38,11 @@ class CreateRequest extends Component {
     this.state = {
       title: "",
       description: "",
-      activeStep: 0
+      activeStep: 0,
+      jwtToken: sessionStorage.getItem('jwtToken'),
+      imgURL: "",
+      isUploading: false,
+      progress: 0
     };
     this.onSubmit = this.onSubmit.bind(this);
     this.onChange = this.onChange.bind(this);
@@ -65,6 +72,28 @@ class CreateRequest extends Component {
     return ["Set Title", "Enter a description", "Upload a photo"];
   }
 
+  handleUploadStart = () =>
+    this.setState({ ...this.state, isUploading: true, progress: 0 });
+  handleProgress = progress => this.setState({ ...this.state, progress });
+  handleUploadError = error => {
+    this.setState({ ...this.state, isUploading: false });
+    console.error(error);
+  };
+  handleUploadSuccess = filename => {
+    this.setState({
+      ...this.state,
+      avatar: filename,
+      progress: 100,
+      isUploading: false
+    });
+    firebase
+      .storage()
+      .ref("images")
+      .child(filename)
+      .getDownloadURL()
+      .then(url => this.setState({ ...this.state, imgURL: url }));
+  };
+
   getStepContent(step) {
     switch (step) {
       case 0:
@@ -89,10 +118,22 @@ class CreateRequest extends Component {
           />
         );
       case 2:
-        return `Try out different ad text to see what brings in the most customers,
-                and learn how to enhance your ads using features like ad extensions.
-                If you run into any problems with your ads, find out how to tell if
-                they're running and how to resolve approval issues.`;
+        return (
+          <div>
+            {this.state.isUploading && <p>Progress: {this.state.progress}</p>}
+            {this.state.imgURL && <img src={this.state.imgURL} />}
+            <FileUploader
+              accept="image/*"
+              name="avatar"
+              randomizeFilename
+              storageRef={firebase.storage().ref("images")}
+              onUploadStart={this.handleUploadStart}
+              onUploadError={this.handleUploadError}
+              onUploadSuccess={this.handleUploadSuccess}
+              onProgress={this.handleProgress}
+            />
+          </div>
+        );
       default:
         return "Unknown step";
     }
@@ -104,8 +145,8 @@ class CreateRequest extends Component {
     axios.post("/getInfobyJWT", this.state).then(res => {
       res = res.data;
       console.log(res);
-      if(res.success == false){
-        this.props.history.push('/login');
+      if (res.success == false) {
+        this.props.history.push("/login");
       }
     });
     return (
