@@ -4,7 +4,7 @@ import Login from "./components/login";
 import Signup from "./components/signup";
 import Dashboard from "./components/dashboard";
 import Titleboard from "./components/titleboard";
-import Profile from "./components/profile";
+import CreateRequest from "./components/createRequest";
 class App extends Component {
   render() {
     return (
@@ -21,7 +21,7 @@ const Content = () => (
     <Route exact path="/signup" component={Signup} />
     <Route exact path="/" component={Dashboard} />
     <Route exact path="/titleboard" component={Titleboard} />
-    <Route path="/profile/:id" component={Profile} />
+    <Route exact path="/createRequest" component={CreateRequest} />
   </Switch>
 );
 
