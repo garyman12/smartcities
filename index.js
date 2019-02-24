@@ -29,6 +29,7 @@ app.post("/createRequest", (req, res) => {
   firebaseInteractor
     .createRequest(req.body)
     .then(function(result) {
+    console.log(resultc+ "a")
       res.send(result);
     })
     .catch(function(error) {

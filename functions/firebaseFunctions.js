@@ -48,25 +48,26 @@ firebaseFunctions.prototype = {
 })
 },
     createRequest(dataBlock){
+
         return new Promise(function(fulfill, reject){
-
-       
-        db.collection("helpRequests").add({
-            body: dataBlock.description,
-            title: dataBlock.title,
-            image: dataBlock.image,
-            userID: dataBlock.userID,
-            location: new firebase.firestore.GeoPoint(dataBlock.latitude, dataBlock.longitude),
-            finished: false,
-            completedID: "",
-            rank: 1,
-            reward: 0
-
-        }).then(function(result){
-            fulfill(JSON.stringify({success: true, redirect: "/dashboard"}))
-        }).catch(function(error){
-            reject(JSON.stringify({success: false, redirect: "/dashboard"}))
-        })
+            db.collection("helpRequests").add({
+                body: dataBlock.description,
+                title: dataBlock.title,
+                image: dataBlock.imgURL,
+                userID: dataBlock.userID,
+                latitude: dataBlock.latitude,
+                longitude: dataBlock.longitude,
+                finished: false,
+                completedID: "",
+                rank: 1,
+    
+            }).then(function(docRef) {
+                console.log(docRef)
+                fulfill(JSON.stringify({success: true, redirect: "/" }))
+            }).catch(function(error){
+                console.log(error)
+                reject(JSON.stringify({success: false, redirect: "/"}))
+            })
     })
     },
     getRequests(){
