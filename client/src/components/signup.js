@@ -27,7 +27,7 @@ class Signup extends Component {
   onSubmit(e) {
     e.preventDefault();
     console.log(this.state);
-    axios.post("/singup", this.state).then(res => {
+    axios.post("/register", this.state).then(res => {
       res = res.data;
       console.log(res);
     });
