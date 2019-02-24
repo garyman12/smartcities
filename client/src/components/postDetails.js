@@ -46,6 +46,27 @@ class PostDetails extends Component {
       });
   }
 
+  onMarkerClick = (props, marker) =>
+  this.setState({
+    activeMarker: marker,
+    selectedPlace: props,
+    showingInfoWindow: true
+  });
+
+onInfoWindowClose = () =>
+  this.setState({
+    activeMarker: null,
+    showingInfoWindow: false
+  });
+
+onMapClicked = () => {
+  if (this.state.showingInfoWindow)
+    this.setState({
+      activeMarker: null,
+      showingInfoWindow: false
+    });
+};
+
   render() {
     return (
       <div className="postdetails">
@@ -73,7 +94,8 @@ class PostDetails extends Component {
           <Map 
             google={this.props.google} 
             zoom={14} 
-            style={{ height: '20vh', position: 'relative', width: '100%' }}
+            className="map"
+            style={{height: "50vh", width: "100%"}}
           >
             <Marker onClick={this.onMarkerClick}
             name={'Current location'} />
@@ -84,6 +106,7 @@ class PostDetails extends Component {
             </InfoWindow>
           </Map>
         </Grid>
+        <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
         <form onSubmit={this.onSubmit}>
           <Grid container className="detail-grid" justify="center">
             <div className="container-login100-form-btn">
