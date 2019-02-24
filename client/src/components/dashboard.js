@@ -43,7 +43,7 @@ class Dashboard extends Component {
       res = res.data;
       console.log(res);
       if(res.success == false){
-        //redirect to /login
+        this.props.history.push('/login');
       }
     });
     return (
