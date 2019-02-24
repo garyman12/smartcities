@@ -32,47 +32,52 @@ class Login extends Component {
   render() {
     return (
       <div className="App">
-        <form onSubmit={this.onSubmit}>
-          <div className="p-t-31 p-b-9">
-            <span className="txt1">Email</span>
-          </div>
-          <div className="wrap-input100" data-validate="Email is required">
-            <input
-              className="input100"
-              type="email"
-              name="email"
-              value={this.state.email}
-              onChange={this.onChange}
-              type="text"
-            />
-            <span className="focus-input" />
-          </div>
+        <div className="outerCenter">
+          <div className="middleCenter">
+            <div className="innerCenter">
+              <form onSubmit={this.onSubmit}>
+                <div className="">
+                  <span className="">Email</span>
+                </div>
+                <div className="" data-validate="Email is required">
+                  <input
+                    className=""
+                    type="email"
+                    name="email"
+                    value={this.state.email}
+                    onChange={this.onChange}
+                  />
+                  <span className=""/>
+                </div>
 
-          <div className="p-t-13 p-b-9">
-            <span className="txt1">Password</span>
-            <br />
-            <a href="/forgotPassword" className="txt2 bo1 m-l-5">
-              Forgot?
-            </a>
-          </div>
+                <div className="">
+                  <span className="">Password</span>
+                  <br />
+                  <a href="/forgotPassword" className="">
+                    Forgot?
+                  </a>
+                </div>
 
-          <div className="wrap-input100" data-validate="Password is required">
-            <input
-              className="input100"
-              type="password"
-              name="password"
-              value={this.state.password}
-              onChange={this.onChange}
-            />
-            <span className="focus-input100" />
-          </div>
+                <div className="" data-validate="Password is required">
+                  <input
+                    className=""
+                    type="password"
+                    name="password"
+                    value={this.state.password}
+                    onChange={this.onChange}
+                  />
+                  <span className="" />
+                </div>
 
-          <div className="container-login100-form-btn m-t-17">
-            <button type="submit" className="login100-form-btn">
-              Sign In
-            </button>
+                <div className="">
+                  <button type="submit" className="">
+                    Sign In
+                  </button>
+                </div>
+              </form>
+            </div>
           </div>
-        </form>
+        </div>
       </div>
     );
   }
