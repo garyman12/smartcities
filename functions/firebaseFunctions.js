@@ -77,12 +77,21 @@ firebaseFunctions.prototype = {
             .then(function(querySnapshot){
                 querySnapshot.forEach(function(doc) {
                     console.log(doc.data())
-                    results.push(doc.data())
+                    results.push({ID: doc.id, data: doc.data()})
                  })
             }).then(function(){
                 fulfill(results)
             }).catch(function(error){
                 reject(error)
+            })
+        })
+    },
+    getExactRequest(dataBlock){
+        return new Promise(function(fulfill,reject){
+            db.collection("helpRequests").doc(dataBlock).get().then(function(result){
+                fulfill(JSON.stringify({success: true, data: result.data()}))
+            }).catch(function(error){
+                fulfill(JSON.stringify({success: false}))
             })
         })
     },
