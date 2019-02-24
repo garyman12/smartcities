@@ -6,6 +6,9 @@ var firebaseFunctions = function(){
 firebaseFunctions.prototype = {
 
     createUser(dataBlock){
+        return new Promise(function(fulfill, reject){
+            console.log(dataBlock)
+        
         db.collection("users").add({
             age: dataBlock.age,
             nameFirst: dataBlock.nameFirst,
@@ -15,10 +18,13 @@ firebaseFunctions.prototype = {
             password: dataBlock.password
 
         }).then(function(docRef) {
-            console.log("Created user in firebase Storage with ID: ", docRef.id);
+            console.log(docRef)
+            fulfill(JSON.stringify({success: true, redirect: "/login" }))
         }).catch(function(error){
-            console.log("User creation function threw error: ", error);
+            console.log(error)
+            reject(JSON.stringify({success: false, redirect: "/register"}))
         })
+    })
     },
 
     authenticateUser(dataBlock){
@@ -35,6 +41,23 @@ firebaseFunctions.prototype = {
         console.log(error)
     })
 })
+},
+    createRequest(dataBlock){
+        return new Promise(function(fulfill, reject){
+
+       
+        db.collection("helpRequests").add({
+            body: dataBlock.description,
+            title: dataBlock.title,
+            image: dataBlock.image,
+            userID: dataBlock.userID,
+            location: dataBlock.location
+        }).then(function(result){
+            fulfill(JSON.stringify({success: true, redirect: "/dashboard"}))
+        }).catch(function(error){
+            reject(JSON.stringify({success: false, redirect: "/dashboard"}))
+        })
+    })
     }
 
 }
