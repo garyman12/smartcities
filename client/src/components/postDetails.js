@@ -16,6 +16,7 @@ class PostDetails extends Component {
       info: {},
       selectedPlace: "Place"
     };
+    this.onSubmit = this.onSubmit.bind(this);
   }
   componentWillMount() {
     window.sessionStorage.removeItem("redirect");
@@ -29,6 +30,20 @@ class PostDetails extends Component {
 
   showSettings(event) {
     event.preventDefault();
+  }
+
+  onSubmit(e) {
+    e.preventDefault();
+    console.log(this.state)
+    axios
+      .post("/markComplete", {
+        jwtToken: this.state.jwtToken,
+        id: this.state.id
+      })
+      .then(res => {
+        console.log(res.body);
+        this.props.history.push('/');
+      });
   }
 
   render() {
@@ -69,14 +84,18 @@ class PostDetails extends Component {
             </InfoWindow>
           </Map>
         </Grid>
-        <Grid container className="detail-grid" justify="center">
-          <div className="container-login100-form-btn">
-            <div className="wrap-login100-form-btn">
-              <div className="login100-form-bgbtn" />
-              <button className="login100-form-btn">Claim</button>
+        <form onSubmit={this.onSubmit}>
+          <Grid container className="detail-grid" justify="center">
+            <div className="container-login100-form-btn">
+              <div className="wrap-login100-form-btn">
+                <div className="login100-form-bgbtn" />
+                <button type="submit" className="login100-form-btn">
+                  Claim
+                </button>
+              </div>
             </div>
-          </div>
-        </Grid>
+          </Grid>
+        </form>
       </div>
     );
   }

@@ -30,6 +30,7 @@ class Signup extends Component {
     axios.post("/register", this.state).then(res => {
       res = res.data;
       console.log(res);
+      this.props.history.push('/login');
     });
   }
 

@@ -123,35 +123,43 @@ firebaseFunctions.prototype = {
     });
   },
   markComplete(dataBlock) {
-    var points;
     return new Promise(function(fulfill, reject) {
-      db.collection("users")
-        .doc(dataBlock.completedBy)
-        .get()
-        .then(function(result) {
-          block = result.data();
-          console.log(block.reward);
-          points = block.reward;
-        });
-      db.collection("helpRequests")
-        .doc(dataBlock.docID)
-        .update({
-          finished: true,
-          completedID: dataBlock.completedBy
-        })
-        .then(function() {
-          db.collection("users")
-            .doc(dataBlock.completedBy)
-            .update({
-              reward: points + 10
+        var points;
+        var doneBy
+        jwtInteractor.getPayload(dataBlock.jwtToken).then(function(result){
+            doneBy = result.userID
+            db.collection("users")
+            .doc(doneBy)
+            .get()
+            .then(function(result) {
+              block = result.data();
+              console.log(block);
+              points = block.reward;
             });
+          db.collection("helpRequests")
+            .doc(dataBlock.id)
+            .update({
+              finished: true,
+              completedID: doneBy
+            })
+            .then(function() {
+              db.collection("users")
+                .doc(doneBy)
+                .update({
+                  reward: points + 10
+                });
+            })
+            .then(function() {
+              fulfill(JSON.stringify({ success: true, redirect: "/dashboard" }));
+            })
+            .catch(function(error) {
+              reject(JSON.stringify({ success: false, redirect: "/dashboard" }));
+            });
+
+        }).catch(function(error){
+            console.log(error)
         })
-        .then(function() {
-          fulfill(JSON.stringify({ success: true, redirect: "/dashboard" }));
-        })
-        .catch(function(error) {
-          fulfill(JSON.stringify({ success: false, redirect: "/dashboard" }));
-        });
+
     });
   },
   getInfo(userID) {

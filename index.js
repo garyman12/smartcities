@@ -10,7 +10,6 @@ var firebaseInteractor = new firebaseFunction();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(session({ secret: uuidv4(), cookie: { maxAge: 60000 } }));
 
 app.post("/login", (req, res) => {
   firebaseInteractor
@@ -53,7 +52,6 @@ app.get("/getRequests", (req, res) => {
   firebaseInteractor
     .getRequests()
     .then(function(result) {
-      console.log(result);
       res.send(result);
     })
     .catch(function(error) {
@@ -62,6 +60,7 @@ app.get("/getRequests", (req, res) => {
 });
 
 app.post("/markComplete", (req, res) => {
+  console.log("test")
   firebaseInteractor
     .markComplete(req.body)
     .then(function(result) {
