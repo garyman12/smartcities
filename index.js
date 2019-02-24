@@ -32,7 +32,7 @@ firebaseInteractor.createRequest(req.body).then(function(result){
 });
 
 app.post('/signup' , (req,res) =>{
-    console.log(req.body)
+    console.log(req)
     firebaseInteractor.createUser(req.body).then(function(result){
         res.send(result)
     }).catch(function(error){
