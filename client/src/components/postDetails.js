@@ -21,7 +21,6 @@ class PostDetails extends Component {
       info = info.data.data;
       this.setState({ ...this.state, info });
       this.setState(this.state);
-      console.log(this.state);
     });
   }
 
@@ -31,15 +30,13 @@ class PostDetails extends Component {
 
   onSubmit(e) {
     e.preventDefault();
-    console.log(this.state)
     axios
       .post("/markComplete", {
         jwtToken: this.state.jwtToken,
         id: this.state.id
       })
       .then(res => {
-        console.log(res.body);
-        this.props.history.push('/');
+        this.props.history.push("/");
       });
   }
 
@@ -66,7 +63,14 @@ class PostDetails extends Component {
           </p>
         </Grid>
         <Grid container className="detail-grid" justify="center">
-          <Maps className="spacing" />
+          <Maps
+            info={{
+              title: this.state.info.title,
+              lat: this.state.info.latitude,
+              lng: this.state.info.longitude
+            }}
+            className="spacing"
+          />
         </Grid>
         <form onSubmit={this.onSubmit}>
           <Grid container className="detail-grid" justify="center">
