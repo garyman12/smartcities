@@ -106,7 +106,6 @@ onMapClicked = () => {
             </InfoWindow>
           </Map>
         </Grid>
-        <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
         <form onSubmit={this.onSubmit}>
           <Grid container className="detail-grid" justify="center">
             <div className="container-login100-form-btn">
