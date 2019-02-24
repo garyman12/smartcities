@@ -30,6 +30,7 @@ class Login extends Component {
       console.log(res);
       if(res.success == true){
         sessionStorage.setItem("jwtToken", res.jwtInfo)
+        this.props.history.push('/');
       }else{
         this.props.history.push('/login');
       }

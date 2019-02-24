@@ -35,7 +35,8 @@ class CreateRequest extends Component {
     this.state = {
       title: "",
       description: "",
-      activeStep: 0
+      activeStep: 0,
+      jwtToken: sessionStorage.getItem('jwtToken')
     };
     this.onSubmit = this.onSubmit.bind(this);
     this.onChange = this.onChange.bind(this);
