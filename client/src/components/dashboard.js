@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "../css/dashboard.css";
 import Titleboard from "./titleboard";
+import PostCard from "./card";
 
 import axios from "axios";
 
@@ -37,9 +38,13 @@ class Dashboard extends Component {
 
   render() {
     return (
-      <div className="App">
+      <div className="dashboard">
         <Titleboard />
-        <h1>h</h1>
+        <div id="content">
+          <div class="center">
+            <PostCard id="card1" />
+          </div>
+        </div>
       </div>
     );
   }

@@ -2,6 +2,10 @@ body {
     font-family: 'Open Sans';
 }
 
+.titleboard {
+    overflow: hidden;
+}
+
 /* Position and sizing of burger button */
 .bm-burger-button {
     position: fixed;
@@ -88,6 +92,12 @@ body {
     height: 15vh;
     background-color: #f2f2f2;
     text-align: center;
+    position: fixed;
+    z-index: 1;
+}
+
+.invis {
+    height: 15vh;
 }
 
 .titlebar h1 {

@@ -35,7 +35,7 @@ class Signup extends Component {
 
   render() {
     return (
-      <div className="App">
+      <div className="signup">
         <div className="limiter">
           <div className="container-login100">
             <div className="wrap-login100">

@@ -32,7 +32,7 @@ class Login extends Component {
 
   render() {
     return (
-      <div className="App">
+      <div className="login">
         <div className="limiter">
           <div className="container-login100">
             <div className="wrap-login100">
