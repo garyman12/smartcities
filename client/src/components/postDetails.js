@@ -1,10 +1,10 @@
 import React, { Component } from "react";
-import "../css/postDetails.css";
 import Titleboard from "./titleboard";
+import axios from "axios";
+import "../css/postDetails.css";
 import Grid from "@material-ui/core/Grid";
 import Maps from "./maps";
 
-import axios from "axios";
 
 class PostDetails extends Component {
   constructor(props) {
@@ -40,21 +40,26 @@ class PostDetails extends Component {
     return (
       <div className="postdetails">
         <Titleboard />
-        <div id="content">
-          <Grid container justify="center">
+          <Grid container className="detail-grid" justify="center">
             <h1 id="content-title" className="spacing">yeet</h1>
           </Grid>
-          <Grid container justify="center">
+          <Grid container className="detail-grid" justify="center">
             <img id="content-img" className="spacing" alt="idk"/>
           </Grid>
-          <Grid container justify="center">
+          <Grid container className="detail-grid" justify="center">
             <p id="content-desc" className="spacing">sample</p>
           </Grid>
-          <Grid container justify="center">
+          <Grid container className="detail-grid" justify="center">
             <Maps className="spacing"/>
           </Grid>
-
-        </div>
+          <Grid container className="detail-grid" justify="center">
+            <div className="container-login100-form-btn">
+              <div className="wrap-login100-form-btn">
+                <div className="login100-form-bgbtn"/>
+                  <button className="login100-form-btn">Claim</button>
+                </div>
+            </div>
+          </Grid>          
       </div>
     );
   }
