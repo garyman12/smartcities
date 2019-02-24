@@ -3,8 +3,7 @@ import Titleboard from "./titleboard";
 import axios from "axios";
 import "../css/postDetails.css";
 import Grid from "@material-ui/core/Grid";
-import { Map, InfoWindow, Marker, GoogleApiWrapper } from "google-maps-react";
-import { Z_FIXED } from "zlib";
+import Maps from "./maps";
 
 class PostDetails extends Component {
   constructor(props) {
@@ -12,8 +11,7 @@ class PostDetails extends Component {
     this.state = {
       jwtToken: sessionStorage.getItem("jwtToken"),
       id: this.props.match.params.id,
-      info: {},
-      selectedPlace: "Place"
+      info: {}
     };
     this.onSubmit = this.onSubmit.bind(this);
   }
@@ -42,27 +40,6 @@ class PostDetails extends Component {
       });
   }
 
-  onMarkerClick = (props, marker) =>
-    this.setState({
-      activeMarker: marker,
-      selectedPlace: props,
-      showingInfoWindow: true
-    });
-
-  onInfoWindowClose = () =>
-    this.setState({
-      activeMarker: null,
-      showingInfoWindow: false
-    });
-
-  onMapClicked = () => {
-    if (this.state.showingInfoWindow)
-      this.setState({
-        activeMarker: null,
-        showingInfoWindow: false
-      });
-  };
-
   render() {
     return (
       <div className="postdetails">
@@ -78,7 +55,6 @@ class PostDetails extends Component {
             src={this.state.info.image}
             className="spacing"
             alt="idk"
-            style={{ maxWidth: "100%" }}
           />
         </Grid>
         <Grid container className="detail-grid" justify="center">
@@ -87,16 +63,13 @@ class PostDetails extends Component {
           </p>
         </Grid>
         <Grid container className="detail-grid" justify="center">
-          <Map
-            google={this.props.google}
-            zoom={14}
-            className="map"
+          <Maps
             info={{
               title: this.state.info.title,
               lat: this.state.info.latitude,
               lng: this.state.info.longitude
             }}
-            style={{ height: "50vh", width: "100%" }}
+            className="spacing"
           />
         </Grid>
         <form onSubmit={this.onSubmit}>
@@ -116,6 +89,4 @@ class PostDetails extends Component {
   }
 }
 
-export default GoogleApiWrapper({
-  apiKey: "AIzaSyATxm8bDLqjEVPHa4X0gaRYUGjXlrKu0bI"
-})(PostDetails);
+export default PostDetails;

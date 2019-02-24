@@ -60,7 +60,7 @@ app.get("/getRequests", (req, res) => {
 });
 
 app.post("/markComplete", (req, res) => {
-  console.log("test")
+  console.log("test");
   firebaseInteractor
     .markComplete(req.body)
     .then(function(result) {
@@ -102,7 +102,7 @@ app.post("/getInfoByEmail", (req, res) => {
     });
 });
 app.post("/getInfobyJWT", (req, res) => {
-  console.log(req.body.jwtToken)
+  console.log(req.body.jwtToken);
   firebaseInteractor
     .getInfobyJWT(req.body.jwtToken)
     .then(function(result) {

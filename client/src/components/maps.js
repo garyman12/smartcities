@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import GoogleMapReact from "google-map-react";
 
-import axios from "axios";
-
 const AnyReactComponent = ({ text }) => <div>{text}</div>;
 
 class Maps extends Component {
@@ -13,15 +11,6 @@ class Maps extends Component {
     },
     zoom: 11
   };
-
-  onSubmit(e) {
-    e.preventDefault();
-    console.log(this.state);
-    axios.post("/maps", this.state).then(res => {
-      res = res.data;
-      console.log(res);
-    });
-  }
 
   render() {
     console.log(this.props);
@@ -40,8 +29,8 @@ class Maps extends Component {
             defaultZoom={this.props.zoom}
           >
             <AnyReactComponent
-              lat={41.6538624}
-              lng={-83.62065919999999}
+              lat={this.props.info.lat}
+              lng={this.props.info.lng}
               text={this.props.info.title}
             />
           </GoogleMapReact>
