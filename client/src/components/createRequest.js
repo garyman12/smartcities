@@ -105,7 +105,7 @@ class CreateRequest extends Component {
       res = res.data;
       console.log(res);
       if(res.success == false){
-        //redirect to /login
+        <Route exact path="/login" component={Login} />
       }
     });
     return (
