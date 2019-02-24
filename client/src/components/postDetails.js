@@ -13,6 +13,7 @@ class PostDetails extends Component {
       id: this.props.match.params.id,
       info: {}
     };
+    this.onSubmit = this.onSubmit.bind(this);
   }
   componentWillMount() {
     window.sessionStorage.removeItem("redirect");
@@ -30,6 +31,7 @@ class PostDetails extends Component {
 
   onSubmit(e) {
     e.preventDefault();
+    console.log(this.state)
     axios
       .post("/markComplete", {
         jwtToken: this.state.jwtToken,
@@ -37,6 +39,7 @@ class PostDetails extends Component {
       })
       .then(res => {
         console.log(res.body);
+        this.props.history.push('/');
       });
   }
 

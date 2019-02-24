@@ -52,7 +52,6 @@ app.get("/getRequests", (req, res) => {
   firebaseInteractor
     .getRequests()
     .then(function(result) {
-      console.log(result);
       res.send(result);
     })
     .catch(function(error) {
@@ -61,6 +60,7 @@ app.get("/getRequests", (req, res) => {
 });
 
 app.post("/markComplete", (req, res) => {
+  console.log("test")
   firebaseInteractor
     .markComplete(req.body)
     .then(function(result) {
