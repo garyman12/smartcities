@@ -16,11 +16,11 @@ app.post("/login", (req, res) => {
   firebaseInteractor
     .authenticateUser(req.body)
     .then(function(result) {
-    console.log(result)
+      console.log(result);
       res.send(result);
     })
     .catch(function(error) {
-        console.log(error)
+      console.log(error);
       res.send(error);
     });
 });
@@ -29,7 +29,7 @@ app.post("/createRequest", (req, res) => {
   firebaseInteractor
     .createRequest(req.body)
     .then(function(result) {
-    console.log(resultc+ "a")
+      console.log(resultc + "a");
       res.send(result);
     })
     .catch(function(error) {
@@ -62,40 +62,55 @@ app.get("/getRequests", (req, res) => {
 });
 
 app.post("/markComplete", (req, res) => {
-    firebaseInteractor.markComplete(req.body).then(function(result){
-        res.send(result)
-    }).catch(function(error){
-        res.send(error)
+  firebaseInteractor
+    .markComplete(req.body)
+    .then(function(result) {
+      res.send(result);
     })
-})
-app.post("/getRequestInfo", (req,res) =>{
-    firebaseInteractor.getExactRequest(req.body.reqID).then(function(result){
-        res.send(result)
-    }).catch(function(error){
-        res.send(error)
+    .catch(function(error) {
+      res.send(error);
+    });
+});
+app.post("/getRequestInfo", (req, res) => {
+  firebaseInteractor
+    .getExactRequest(req.body.reqID)
+    .then(function(result) {
+      res.send(result);
     })
-})
-app.post("/getInfo", (req,res) =>{
-    console.log(req.body.userID)
-    firebaseInteractor.getInfo(req.body.userID).then(function(result){
-        res.send(result)
-    }).catch(function(error){
-        res.send(error)
+    .catch(function(error) {
+      res.send(error);
+    });
+});
+app.post("/getInfo", (req, res) => {
+  console.log(req.body.userID);
+  firebaseInteractor
+    .getInfo(req.body.userID)
+    .then(function(result) {
+      res.send(result);
     })
-})
-app.post("/getInfoByEmail", (req,res)=>{
-    firebaseInteractor.getInfobyEmail(req.body.email).then(function(result){
-        res.send(result)
-    }).catch(function(error){
-        res.send(error)
+    .catch(function(error) {
+      res.send(error);
+    });
+});
+app.post("/getInfoByEmail", (req, res) => {
+  firebaseInteractor
+    .getInfobyEmail(req.body.email)
+    .then(function(result) {
+      res.send(result);
     })
-})
-app.post("/getInfobyJWT", (req,res) =>{
-    firebaseInteractor.getInfobyJWT(req.body.jwtToken).then(function(result){
-        res.send(result)
-    }).catch(function(error){
-        res.send(error)
+    .catch(function(error) {
+      res.send(error);
+    });
+});
+app.post("/getInfobyJWT", (req, res) => {
+  firebaseInteractor
+    .getInfobyJWT(req.body.jwtToken)
+    .then(function(result) {
+      res.send(result);
     })
-})
+    .catch(function(error) {
+      res.send(error);
+    });
+});
 
 app.listen(3001, () => console.log("Server Started on port 3001"));
