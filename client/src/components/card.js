@@ -58,7 +58,8 @@ class PostCard extends React.Component {
     return (
       <div className="card">
         <Card className={classes.card}>
-          <CardHeader title={this.props.info.data.title} />
+          <CardHeader title={this.props.info.data.title} 
+          subheader={"Category: " + this.props.info.data.category}/>
           <CardMedia
             className={classes.media}
             image={this.props.info.data.image}

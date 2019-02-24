@@ -39,9 +39,10 @@ class CreateRequest extends Component {
     this.state = {
       title: "",
       description: "",
+      imgURL: "",
+      category: "",
       activeStep: 0,
       jwtToken: sessionStorage.getItem("jwtToken"),
-      imgURL: "",
       isUploading: false,
       progress: 0,
       userID: ""
@@ -71,7 +72,8 @@ class CreateRequest extends Component {
       imgURL: this.state.imgURL,
       userID: this.state.userID,
       latitude: this.props.coords.latitude,
-      longitude: this.props.coords.longitude
+      longitude: this.props.coords.longitude,
+      category: this.state.category
     };
     console.log(send);
     axios.post("/createRequest", send).then(res => {
@@ -84,7 +86,7 @@ class CreateRequest extends Component {
     this.setState({ [e.target.name]: e.target.value });
   }
   getSteps() {
-    return ["Set Title", "Enter a description", "Upload a photo"];
+    return ["Set Title", "Enter a description", "Upload a photo", "Catergorize this Problem"];
   }
 
   handleUploadStart = () =>
@@ -148,6 +150,18 @@ class CreateRequest extends Component {
               onProgress={this.handleProgress}
             />
           </div>
+        );
+        case 3:
+        return (
+          <TextField
+            label="Category"
+            name="category"
+            value={this.state.category}
+            onChange={this.onChange}
+            multiline={true}
+            rows={1}
+            rowsMax={Infinity}
+          />
         );
       default:
         return "Unknown step";
