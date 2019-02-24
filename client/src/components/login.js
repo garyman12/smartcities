@@ -35,63 +35,71 @@ class Login extends Component {
     return (
       <div className="App">
         <div className="limiter">
-		      <div className="container-login100">
-			      <div className="wrap-login100">
-				      <form onSubmit={this.onSubmit} className="login100-form validate-form">
-					      <span className="login100-form-title p-b-26">
-						      Welcome
-					      </span>
-					      <span className="login100-form-title p-b-48">
-						      <i className="zmdi zmdi-font"></i>
-					      </span>
+          <div className="container-login100">
+            <div className="wrap-login100">
+              <form
+                onSubmit={this.onSubmit}
+                className="login100-form validate-form"
+              >
+                <span className="login100-form-title p-b-26">Welcome</span>
+                <span className="login100-form-title p-b-48">
+                  <i className="zmdi zmdi-font" />
+                </span>
 
-					      <div className="wrap-input100 validate-input" data-validate="Email is required">
-                  <input 
-                    className="input100" 
+                <div
+                  className="wrap-input100 validate-input"
+                  data-validate="Email is required"
+                >
+                  <input
+                    className="input100"
                     type="email"
-			              name="email"
-			              value={this.state.email}
-			              onChange={this.onChange}
+                    name="email"
+                    value={this.state.email}
+                    onChange={this.onChange}
                   />
-						      <span className="focus-input100" data-placeholder="Email"></span>
-					      </div>
+                  <span className="focus-input100" data-placeholder="Email" />
+                </div>
 
-					<div className="wrap-input100 validate-input" data-validate="Password is required">
-						<span className="btn-show-pass">
-							<i className="zmdi zmdi-eye"></i>
-						</span>
-            <input 
-              className="input100"
-              type="password"
-              name="password"
-              value={this.state.password}
-              onChange={this.onChange}
-            />
-						<span className="focus-input100" data-placeholder="Password"></span>
-					</div>
+                <div
+                  className="wrap-input100 validate-input"
+                  data-validate="Password is required"
+                >
+                  <span className="btn-show-pass">
+                    <i className="zmdi zmdi-eye" />
+                  </span>
+                  <input
+                    className="input100"
+                    type="password"
+                    name="password"
+                    value={this.state.password}
+                    onChange={this.onChange}
+                  />
+                  <span
+                    className="focus-input100"
+                    data-placeholder="Password"
+                  />
+                </div>
 
-					<div className="container-login100-form-btn">
-						<div className="wrap-login100-form-btn">
-							<div className="login100-form-bgbtn"></div>
-							<button className="login100-form-btn" type="submit">
-								Login
-							</button>
-						</div>
-					</div>
+                <div className="container-login100-form-btn">
+                  <div className="wrap-login100-form-btn">
+                    <div className="login100-form-bgbtn" />
+                    <button className="login100-form-btn" type="submit">
+                      Login
+                    </button>
+                  </div>
+                </div>
 
-					<div className="text-center p-t-115">
-						<span className="txt1">
-							Don’t have an account?
-						</span>
+                <div className="text-center p-t-115">
+                  <span className="txt1">Don’t have an account?</span>
 
-						<a className="txt2" href="/forgotPassword">
-							Sign Up
-						</a>
-					</div>
-				</form>
-			</div>
-		</div>
-	</div>
+                  <a className="txt2" href="/forgotPassword">
+                    Sign Up
+                  </a>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
       </div>
     );
   }

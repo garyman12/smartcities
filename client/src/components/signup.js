@@ -27,107 +27,138 @@ class Signup extends Component {
   onSubmit(e) {
     e.preventDefault();
     console.log(this.state);
-    /*axios.post("/singup", this.state).then(res => {
+    axios.post("/singup", this.state).then(res => {
       res = res.data;
       console.log(res);
     });
-    */
   }
 
   render() {
     return (
       <div className="App">
-        <form onSubmit={this.onSubmit}>
-          <div className="p-t-31 p-b-9">
-            <span className="txt1">First Name</span>
-          </div>
-          <div className="wrap-input100" data-validate="First name is required">
-            <input
-              className="input100"
-              name="nameFirst"
-              value={this.state.nameFirst}
-              onChange={this.onChange}
-              type="text"
-            />
-            <span className="focus-input" />
-          </div>
+        <div className="limiter">
+          <div className="container-login100">
+            <div className="wrap-login100">
+              <form
+                onSubmit={this.onSubmit}
+                className="login100-form validate-form"
+              >
+                <span className="login100-form-title p-b-26">Sign Up</span>
+                <span className="login100-form-title p-b-48">
+                  <i className="zmdi zmdi-font" />
+                </span>
 
-          <div className="p-t-31 p-b-9">
-            <span className="txt1">Last Name</span>
-          </div>
-          <div className="wrap-input100" data-validate="Last name is required">
-            <input
-              className="input100"
-              name="nameLast"
-              value={this.state.nameLast}
-              onChange={this.onChange}
-              type="text"
-            />
-            <span className="focus-input" />
-          </div>
+                <div
+                  className="wrap-input100 validate-input"
+                  data-validate="First Name is required"
+                >
+                  <input
+                    className="input100"
+                    type="nameFirst"
+                    name="nameFirst"
+                    value={this.state.nameFirst}
+                    onChange={this.onChange}
+                  />
+                  <span
+                    className="focus-input100"
+                    data-placeholder="First Name"
+                  />
+                </div>
 
-          <div className="p-t-31 p-b-9">
-            <span className="txt1">Email</span>
-          </div>
-          <div className="wrap-input100" data-validate="Email is required">
-            <input
-              className="input100"
-              name="email"
-              value={this.state.email}
-              onChange={this.onChange}
-              type="text"
-            />
-            <span className="focus-input" />
-          </div>
+                <div
+                  className="wrap-input100 validate-input"
+                  data-validate="Last Name is required"
+                >
+                  <input
+                    className="input100"
+                    type="nameLast"
+                    name="nameLast"
+                    value={this.state.nameLast}
+                    onChange={this.onChange}
+                  />
+                  <span
+                    className="focus-input100"
+                    data-placeholder="Last Name"
+                  />
+                </div>
 
-          <div className="p-t-31 p-b-9">
-            <span className="txt1">Age</span>
-          </div>
-          <div className="wrap-input100" data-validate="Age is required">
-            <input
-              className="input100"
-              name="age"
-              value={this.state.age}
-              onChange={this.onChange}
-              type="text"
-            />
-            <span className="focus-input" />
-          </div>
+                <div
+                  className="wrap-input100 validate-input"
+                  data-validate="Email is required"
+                >
+                  <input
+                    className="input100"
+                    type="email"
+                    name="email"
+                    value={this.state.email}
+                    onChange={this.onChange}
+                  />
+                  <span className="focus-input100" data-placeholder="Email" />
+                </div>
 
-          <div className="p-t-31 p-b-9">
-            <span className="txt1">Zip Code</span>
-          </div>
-          <div className="wrap-input100" data-validate="Zip code is required">
-            <input
-              className="input100"
-              name="zipCode"
-              value={this.state.zipCode}
-              onChange={this.onChange}
-              type="text"
-            />
-            <span className="focus-input" />
-          </div>
+                <div
+                  className="wrap-input100 validate-input"
+                  data-validate="Age is required"
+                >
+                  <input
+                    className="input100"
+                    type="age"
+                    name="age"
+                    value={this.state.age}
+                    onChange={this.onChange}
+                  />
+                  <span className="focus-input100" data-placeholder="Age" />
+                </div>
 
-          <div className="p-t-13 p-b-9">
-            <span className="txt1">Password</span>
-          </div>
-          <div className="wrap-input100" data-validate="Password is required">
-            <input
-              className="input100"
-              type="password"
-              name="password"
-              value={this.state.password}
-              onChange={this.onChange}
-            />
-            <span className="focus-input100" />
-          </div>
+                <div
+                  className="wrap-input100 validate-input"
+                  data-validate="Zip Code is required"
+                >
+                  <input
+                    className="input100"
+                    type="zipCode"
+                    name="zipCode"
+                    value={this.state.zipCode}
+                    onChange={this.onChange}
+                  />
+                  <span
+                    className="focus-input100"
+                    data-placeholder="Zip Code"
+                  />
+                </div>
 
-          <div className="container-login100-form-btn m-t-17">
-            <button type="submit" className="login100-form-btn">
-              Sign Up
-            </button>
+                <div
+                  className="wrap-input100 validate-input"
+                  data-validate="Password is required"
+                >
+                  <span className="btn-show-pass">
+                    <i className="zmdi zmdi-eye" />
+                  </span>
+                  <input
+                    className="input100"
+                    type="password"
+                    name="password"
+                    value={this.state.password}
+                    onChange={this.onChange}
+                  />
+                  <span
+                    className="focus-input100"
+                    data-placeholder="Password"
+                  />
+                </div>
+
+                <div className="container-login100-form-btn">
+                  <div className="wrap-login100-form-btn">
+                    <div className="login100-form-bgbtn" />
+                    <button className="login100-form-btn" type="submit">
+                      Sign Up
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
           </div>
-        </form>
+        </div>
       </div>
     );
   }
