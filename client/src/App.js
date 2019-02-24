@@ -6,7 +6,7 @@ import Dashboard from "./components/dashboard";
 import Titleboard from "./components/titleboard";
 import CreateRequest from "./components/createRequest";
 import PostDetails from "./components/postDetails";
-import Maps from "./components/maps";
+import Profile from "./components/profile";
 
 class App extends Component {
   render() {
