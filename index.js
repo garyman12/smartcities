@@ -102,6 +102,7 @@ app.post("/getInfoByEmail", (req, res) => {
     });
 });
 app.post("/getInfobyJWT", (req, res) => {
+  console.log(req.body.jwtToken)
   firebaseInteractor
     .getInfobyJWT(req.body.jwtToken)
     .then(function(result) {
