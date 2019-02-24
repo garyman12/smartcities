@@ -10,7 +10,6 @@ var firebaseInteractor = new firebaseFunction();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(session({ secret: uuidv4(), cookie: { maxAge: 60000 } }));
 
 app.post("/login", (req, res) => {
   firebaseInteractor
