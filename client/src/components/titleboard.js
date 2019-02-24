@@ -1,10 +1,10 @@
 import React, { Component } from "react";
-import "../css/dashboard.css";
+import "../css/titleboard.css";
 import { slide as Menu } from 'react-burger-menu';
 
 import axios from "axios";
 
-class Dashboard extends Component {
+class Titleboard extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -25,7 +25,7 @@ class Dashboard extends Component {
   onSubmit(e) {
     e.preventDefault();
     console.log(this.state);
-    axios.post("/dashboard", this.state).then(res => {
+    axios.post("/titleboard", this.state).then(res => {
       res = res.data;
       console.log(res);
     });
@@ -38,16 +38,18 @@ class Dashboard extends Component {
   render() {
     return (
       <div className="App">
-        <Menu>
-          <a id="home" className="menu-item" href="/">Home</a>
-          <a id="about" className="menu-item" href="/about">About</a>
-          <a id="contact" className="menu-item" href="/contact">Contact</a>
-          <a onClick={ this.showSettings } className="menu-item--small" href="https://google.com">Settings</a>
-        </Menu>
-        <h1>h</h1>
+        <div className="titlebar">
+          <Menu>
+            <a id="home" className="menu-item" href="/">Home</a>
+            <a id="about" className="menu-item" href="/about">About</a>
+            <a id="contact" className="menu-item" href="/contact">Contact</a>
+            <a onClick={ this.showSettings } className="menu-item--small" href="https://google.com">Settings</a>
+          </Menu>
+          <h1>Title</h1>
+        </div>
       </div>
     );
   }
 }
 
-export default Dashboard;
+export default Titleboard;

@@ -228,7 +228,7 @@ iframe {
   -moz-transition: all 0.4s;
   transition: all 0.4s;
 
-  background: rgb(79,184,255);
+  background: #4fb8ff;
   background: linear-gradient(90deg, rgba(79,184,255,1) 31%, rgba(0,151,255,1) 87%);
 }
 
