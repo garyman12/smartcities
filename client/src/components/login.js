@@ -23,25 +23,10 @@ class Login extends Component {
   onSubmit(e) {
     e.preventDefault();
     console.log(this.state);
-    /*axios
-      .post("/api/signup/createUser", {
-        user: {
-          firstName: this.state.firstName,
-          lastName: this.state.lastName,
-          rank: "1",
-          email: this.state.email,
-          primary_dojo: "1",
-          birthday: this.state.birthday
-        },
-        token: sessionStorage.getItem("id")
-      })
-      .then(res => {
-        res = res.data;
-        console.log(res);
-        if (res.success === "false") {
-          this.setState({ err: true });
-        }
-      });*/
+    axios.post("/login", this.state).then(res => {
+      res = res.data;
+      console.log(res);
+    });
   }
 
   render() {
