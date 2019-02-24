@@ -1,7 +1,6 @@
 var key = "asdasfkajosbdhaisjlfakspkfljnbuqhip2ow3asdjnasl"
 var jwt = require('jsonwebtoken');
 var jwtFunctions = function(signKey){
-    // Assign our generated Secret.
 }
 
 jwtFunctions.prototype = {
