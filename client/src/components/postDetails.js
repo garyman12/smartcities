@@ -38,15 +38,22 @@ class PostDetails extends Component {
 
   render() {
     return (
-      <div className="dashboard">
+      <div className="postdetails">
         <Titleboard />
         <div id="content">
           <Grid container justify="center">
-            <h1 id="content-title">yeet</h1>
-            <img id="content-img"></img>
-            <p id="content-desc"></p>
-            <Maps />
+            <h1 id="content-title" className="spacing">yeet</h1>
           </Grid>
+          <Grid container justify="center">
+            <img id="content-img" className="spacing" alt="idk"/>
+          </Grid>
+          <Grid container justify="center">
+            <p id="content-desc" className="spacing">sample</p>
+          </Grid>
+          <Grid container justify="center">
+            <Maps className="spacing"/>
+          </Grid>
+
         </div>
       </div>
     );

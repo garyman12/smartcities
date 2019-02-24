@@ -27,7 +27,7 @@ class Maps extends Component {
   render() {
     return (
       // Important! Always set the container height explicitly
-      <div style={{ height: '40vh', width: '100%' }}>
+      <div style={{ height: '40vh', width: '100%'}}>
         <GoogleMapReact
           defaultCenter={this.props.center}
           defaultZoom={this.props.zoom}
