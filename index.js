@@ -31,7 +31,7 @@ firebaseInteractor.createRequest(req.body).then(function(result){
 })
 });
 
-app.post('/register' , (req,res) =>{
+app.post('/signup' , (req,res) =>{
     console.log(req.body)
     firebaseInteractor.createUser(req.body).then(function(result){
         res.send(result)
