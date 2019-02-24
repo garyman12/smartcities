@@ -1,4 +1,9 @@
 import React, { Component } from "react";
+import Titleboard from "./titleboard";
+import axios from "axios";
+import "../css/postDetails.css";
+import Grid from "@material-ui/core/Grid";
+
 
 class Profile extends Component {
     onSubmit(e) {
@@ -11,7 +16,10 @@ class Profile extends Component {
     }
     render() {
         return (
-            <h1></h1>
+            <div className="profile-content">
+                <Titleboard />
+                <h1></h1>
+            </div>
         );
     }
 }

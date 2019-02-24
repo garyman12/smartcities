@@ -27,7 +27,7 @@ const Content = () => (
     <Route exact path="/titleboard" component={Titleboard} />
     <Route exact path="/createRequest" component={CreateRequest} />
     <Route exact path="/postDetails" component={PostDetails} />
-    <Route exact path="/maps" component={Maps} />
+    <Route exact path="/profile" component={Profile} />
   </Switch>
 );
 
