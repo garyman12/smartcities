@@ -13,7 +13,8 @@ import "../css/card.css";
 
 const styles = theme => ({
   card: {
-    maxWidth: 400
+    maxWidth: 400,
+    margin: "4%"
   },
   media: {
     height: 0,

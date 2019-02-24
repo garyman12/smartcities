@@ -1,9 +1,8 @@
-.card {
-  margin: 5vh;
+.card-item {
+  width: 100%;
 }
-
 @media (max-width: 576px) {
   .card {
-    margin: 5vw;
+    width: 100vw;
   }
 }

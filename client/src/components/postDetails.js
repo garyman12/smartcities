@@ -10,26 +10,17 @@ class PostDetails extends Component {
     super(props);
     this.state = {
       jwtToken: sessionStorage.getItem("jwtToken"),
-      id: this.props.match.params.id
+      id: this.props.match.params.id,
+      info: {}
     };
-    this.onSubmit = this.onSubmit.bind(this);
-    this.onChange = this.onChange.bind(this);
   }
   componentWillMount() {
     window.sessionStorage.removeItem("redirect");
-    axios.post("/")
-  }
-
-  onChange(e) {
-    this.setState({ [e.target.name]: e.target.value });
-  }
-
-  onSubmit(e) {
-    e.preventDefault();
-    console.log(this.state);
-    axios.post("/postDetails", this.state).then(res => {
-      res = res.data;
-      console.log(res);
+    axios.post("/getRequestInfo", { reqID: this.state.id }).then(info => {
+      info = info.data.data;
+      this.setState({ ...this.state, info });
+      this.setState(this.state);
+      console.log(this.state);
     });
   }
 
@@ -43,15 +34,20 @@ class PostDetails extends Component {
         <Titleboard />
         <Grid container className="detail-grid" justify="center">
           <h1 id="content-title" className="spacing">
-            yeet
+            {this.state.info.title}
           </h1>
         </Grid>
         <Grid container className="detail-grid" justify="center">
-          <img id="content-img" className="spacing" alt="idk" />
+          <img
+            id="content-img"
+            src={this.state.info.image}
+            className="spacing"
+            alt="idk"
+          />
         </Grid>
         <Grid container className="detail-grid" justify="center">
           <p id="content-desc" className="spacing">
-            sample
+            {this.state.info.body}
           </p>
         </Grid>
         <Grid container className="detail-grid" justify="center">
