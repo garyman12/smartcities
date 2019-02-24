@@ -1,21 +1,14 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
-import classnames from "classnames";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
 import CardMedia from "@material-ui/core/CardMedia";
 import CardContent from "@material-ui/core/CardContent";
 import CardActions from "@material-ui/core/CardActions";
-import Collapse from "@material-ui/core/Collapse";
-import Avatar from "@material-ui/core/Avatar";
-import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 import red from "@material-ui/core/colors/red";
-import FavoriteIcon from "@material-ui/icons/Favorite";
-import ShareIcon from "@material-ui/icons/Share";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import MoreVertIcon from "@material-ui/icons/MoreVert";
+import Button from "@material-ui/core/Button";
 import "../css/card.css";
 
 const styles = theme => ({
@@ -64,15 +57,24 @@ class PostCard extends React.Component {
     return (
       <div className="card">
         <Card className={classes.card}>
-          <CardHeader title={this.props.info.title} />
+          <CardHeader title={this.props.info.data.title} />
           <CardMedia
             className={classes.media}
-            image={this.props.info.image}
+            image={this.props.info.data.image}
             title="image"
           />
           <CardContent>
-            <Typography component="p">{this.props.info.body}</Typography>
+            <Typography component="p">{this.props.info.data.body}</Typography>
           </CardContent>
+          <CardActions>
+            <Button
+              size="small"
+              href={"/postDetails/" + this.props.info.ID}
+              color="primary"
+            >
+              More Info
+            </Button>
+          </CardActions>
         </Card>
       </div>
     );

@@ -77,6 +77,7 @@ class CreateRequest extends Component {
     axios.post("/createRequest", send).then(res => {
       res = res.data;
       console.log(res);
+      this.props.history.push('/');
     });
   }
   onChange(e) {
