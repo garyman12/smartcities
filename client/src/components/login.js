@@ -31,7 +31,7 @@ class Login extends Component {
       if(res.success == true){
         sessionStorage.setItem("jwtToken", res.jwtInfo)
       }else{
-        console.log("Error")
+        // Redirect to /login
       }
     });
   }

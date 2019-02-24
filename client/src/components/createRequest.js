@@ -10,6 +10,7 @@ import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
 import Titleboard from "./titleboard";
+import axios from "axios";
 import "../css/dashboard.css";
 
 const styles = theme => ({
@@ -100,7 +101,13 @@ class CreateRequest extends Component {
   render() {
     const { classes } = this.props;
     const steps = this.getSteps();
-
+    axios.post("/getInfobyJWT", this.state).then(res => {
+      res = res.data;
+      console.log(res);
+      if(res.success == false){
+        //redirect to /login
+      }
+    });
     return (
       <div className="App">
         <Titleboard />

@@ -42,6 +42,9 @@ class Dashboard extends Component {
     axios.post("/getInfobyJWT", this.state).then(res => {
       res = res.data;
       console.log(res);
+      if(res.success == false){
+        //redirect to /login
+      }
     });
     return (
       <div className="dashboard">
