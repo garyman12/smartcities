@@ -26,11 +26,9 @@ class Signup extends Component {
 
   onSubmit(e) {
     e.preventDefault();
-    console.log(this.state);
     axios.post("/register", this.state).then(res => {
       res = res.data;
-      console.log(res);
-      this.props.history.push('/login');
+      this.props.history.push("/login");
     });
   }
 
@@ -158,7 +156,7 @@ class Signup extends Component {
                 </div>
                 <div className="text-center p-t-11">
                   <span className="txt1">Already have an account?</span>
-                  <br/>
+                  <br />
                   <a className="txt2" href="/login">
                     Login
                   </a>

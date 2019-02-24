@@ -57,13 +57,20 @@ class Profile extends Component {
 
   componentWillMount() {
     window.sessionStorage.removeItem("redirect");
-    axios.post("/getInfobyJWT", { jwtToken: this.jwtToken }).then(res => {
+    axios.post("/getInfobyJWT", { jwtToken: this.state.jwtToken }).then(res => {
       res = res.data;
-      if (res.success == false) {
-        this.props.history.push("/login");
-      }
+
+      this.setState({
+        ...this.state,
+        user: {
+          nameFirst: res.data.nameFirst,
+          nameLast: res.data.nameLast,
+          reward: res.data.reward
+        }
+      });
+      this.setState({ ...this.state, completed: res.completedTasks });
+      this.setState({ ...this.state, requested: res.requestedTasks });
     });
-    axios.post("/getInfobyJWT");
   }
 
   render() {
@@ -78,16 +85,19 @@ class Profile extends Component {
               <div className={classes.details}>
                 <CardContent className={classes.content}>
                   <Typography component="h5" variant="h5">
-                    Nathan Rogers
+                    {this.state.user.nameFirst + " " + this.state.user.nameLast}
                   </Typography>
                   <Typography variant="subtitle1" color="textSecondary">
-                    Balance: 20
+                    Balance: {this.state.user.reward}
                   </Typography>
                 </CardContent>
               </div>
             </Card>
           </Grid>
           <div id="completed">
+            <Typography variant="h2" gutterBottom>
+              Completed:
+            </Typography>
             <Grid container justify="center">
               {this.state.completed.map(complete => (
                 <>
@@ -97,6 +107,9 @@ class Profile extends Component {
             </Grid>
           </div>
           <div id="posted">
+            <Typography variant="h2" gutterBottom>
+              Posted:
+            </Typography>
             <Grid container justify="center">
               {this.state.requested.map(request => (
                 <>

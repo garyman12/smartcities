@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "../css/titleboard.css";
-import { slide as Menu } from 'react-burger-menu';
+import { slide as Menu } from "react-burger-menu";
 
 import axios from "axios";
 
@@ -24,14 +24,12 @@ class Titleboard extends Component {
 
   onSubmit(e) {
     e.preventDefault();
-    console.log(this.state);
     axios.post("/titleboard", this.state).then(res => {
       res = res.data;
-      console.log(res);
     });
   }
 
-  showSettings (event) {
+  showSettings(event) {
     event.preventDefault();
   }
 
@@ -40,15 +38,25 @@ class Titleboard extends Component {
       <div className="titleboard">
         <div className="titlebar">
           <Menu>
-            <a id="home" className="menu-item" href="/">Home</a>
-            <a id="about" className="menu-item" href="/createRequest">Submit</a>
-            <a id="contact" className="menu-item" onClick={ this.showSettings } href="/profile">Profile</a>
-            <a id="logout"className="menu-item" href="/login">Logout</a>
+            <a id="home" className="menu-item" href="/">
+              Home
+            </a>
+            <a id="about" className="menu-item" href="/createRequest">
+              Submit
+            </a>
+            <a id="contact" className="menu-item" href="/profile">
+              Profile
+            </a>
+            <a id="logout" className="menu-item" href="/login">
+              Logout
+            </a>
           </Menu>
-          <a className="submit-btn" href="/createRequest">+</a>
+          <a className="submit-btn" href="/createRequest">
+            +
+          </a>
           <h1>Munici-Pal</h1>
         </div>
-        <div className="invis"></div>
+        <div className="invis" />
       </div>
     );
   }

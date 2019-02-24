@@ -13,7 +13,6 @@ class Maps extends Component {
   };
 
   render() {
-    console.log(this.props);
     if (this.props.info.title !== undefined) {
       return (
         // Important! Always set the container height explicitly

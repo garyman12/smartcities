@@ -24,10 +24,8 @@ class Login extends Component {
 
   onSubmit(e) {
     e.preventDefault();
-    console.log(this.state);
     axios.post("/login", this.state).then(res => {
       res = res.data;
-      console.log(res);
       if(res.success == true){
         sessionStorage.setItem("jwtToken", res.jwtInfo)
         this.props.history.push('/');

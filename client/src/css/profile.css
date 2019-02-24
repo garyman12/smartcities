@@ -11,3 +11,12 @@
     margin-right: 5vw;
   }
 }
+
+#completed {
+  margin-top: 3vh;
+  text-align: center;
+}
+#posted {
+  margin-top: 3vh;
+  text-align: center;
+}

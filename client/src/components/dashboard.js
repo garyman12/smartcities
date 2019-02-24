@@ -37,7 +37,6 @@ class Dashboard extends Component {
 
   onSubmit(e) {
     e.preventDefault();
-    console.log(this.state);
     axios.post("/dashboard", this.state).then(res => {
       res = res.data;
     });

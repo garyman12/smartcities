@@ -75,10 +75,8 @@ class CreateRequest extends Component {
       longitude: this.props.coords.longitude,
       category: this.state.category
     };
-    console.log(send);
     axios.post("/createRequest", send).then(res => {
       res = res.data;
-      console.log(res);
       this.props.history.push('/');
     });
   }

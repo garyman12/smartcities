@@ -64,7 +64,7 @@ firebaseFunctions.prototype = {
     });
   },
   createRequest(dataBlock) {
-      console.log(dataBlock.category)
+    console.log(dataBlock.category);
     return new Promise(function(fulfill, reject) {
       db.collection("helpRequests")
         .add({
@@ -124,11 +124,13 @@ firebaseFunctions.prototype = {
   },
   markComplete(dataBlock) {
     return new Promise(function(fulfill, reject) {
-        var points;
-        var doneBy
-        jwtInteractor.getPayload(dataBlock.jwtToken).then(function(result){
-            doneBy = result.userID
-            db.collection("users")
+      var points;
+      var doneBy;
+      jwtInteractor
+        .getPayload(dataBlock.jwtToken)
+        .then(function(result) {
+          doneBy = result.userID;
+          db.collection("users")
             .doc(doneBy)
             .get()
             .then(function(result) {
@@ -150,16 +152,19 @@ firebaseFunctions.prototype = {
                 });
             })
             .then(function() {
-              fulfill(JSON.stringify({ success: true, redirect: "/dashboard" }));
+              fulfill(
+                JSON.stringify({ success: true, redirect: "/dashboard" })
+              );
             })
             .catch(function(error) {
-              reject(JSON.stringify({ success: false, redirect: "/dashboard" }));
+              reject(
+                JSON.stringify({ success: false, redirect: "/dashboard" })
+              );
             });
-
-        }).catch(function(error){
-            console.log(error)
         })
-
+        .catch(function(error) {
+          console.log(error);
+        });
     });
   },
   getInfo(userID) {
@@ -192,27 +197,36 @@ firebaseFunctions.prototype = {
     });
   },
 
-  getPostedHelp(JWT){
-    return new Promise(function(fulfill, reject){
-        var requested = new Array()
-        jwtInteractor.getPayload(JWT).then(function(result){
-            var userID = result.userID
-            db.collection("helpRequests").where("finished", "==", false).where("userID", "==", userID).get().then(function(querySnapshot) {
-                querySnapshot.forEach(function(results) {
-                  requested.push({ ID: results.id, data: results.data() })
-                });
-              }).then(function(){
-                  fulfill(requested)
-              })
-        }).catch(function(error){
-            console.log(error)
+  getPostedHelp(JWT) {
+    return new Promise(function(fulfill, reject) {
+      var requested = new Array();
+      jwtInteractor
+        .getPayload(JWT)
+        .then(function(result) {
+          var userID = result.userID;
+          db.collection("helpRequests")
+            .where("finished", "==", false)
+            .where("userID", "==", userID)
+            .get()
+            .then(function(querySnapshot) {
+              querySnapshot.forEach(function(results) {
+                requested.push({ ID: results.id, data: results.data() });
+              });
+            })
+            .then(function() {
+              fulfill(requested);
+            });
         })
-    })
+        .catch(function(error) {
+          console.log(error);
+        });
+    });
   },
   getInfobyJWT(JWT) {
     return new Promise(function(fulfill, reject) {
-        var completed = new Array()
-        var requested = new Array()
+      console.log(JWT);
+      var completed = new Array();
+      var requested = new Array();
       jwtInteractor
         .getPayload(JWT)
         .then(function(result) {
@@ -221,21 +235,39 @@ firebaseFunctions.prototype = {
             .doc(result.userID)
             .get()
             .then(function(doc) {
-                db.collection("helpRequests").where("completedID", "==", result.userID).get().then(function(querySnapshot) {
-                    querySnapshot.forEach(function(results) {
-                      completed.push({ ID: results.id, data: results.data() })
-                    });
-                  }).then(function(){
-                    db.collection("helpRequests").where("finished", "==", false).where("userID", "==", result.userID).get().then(function(querySnapshot) {
-                        querySnapshot.forEach(function(results) {
-                          requested.push({ ID: results.id, data: results.data() })
+              db.collection("helpRequests")
+                .where("completedID", "==", result.userID)
+                .get()
+                .then(function(querySnapshot) {
+                  querySnapshot.forEach(function(results) {
+                    completed.push({ ID: results.id, data: results.data() });
+                  });
+                })
+                .then(function() {
+                  db.collection("helpRequests")
+                    .where("finished", "==", false)
+                    .where("userID", "==", result.userID)
+                    .get()
+                    .then(function(querySnapshot) {
+                      querySnapshot.forEach(function(results) {
+                        requested.push({
+                          ID: results.id,
+                          data: results.data()
                         });
-                      }).then(function(){
-                      fulfill(
-                          JSON.stringify({ success: true, data: doc.data(), ID: doc.id, completedTasks: completed, requestedTasks: requested })
-                        );
+                      });
                     })
-                  })
+                    .then(function() {
+                      fulfill(
+                        JSON.stringify({
+                          success: true,
+                          data: doc.data(),
+                          ID: doc.id,
+                          completedTasks: completed,
+                          requestedTasks: requested
+                        })
+                      );
+                    });
+                });
             })
             .catch(function(error) {
               console.log(error);
