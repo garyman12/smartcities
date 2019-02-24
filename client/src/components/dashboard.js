@@ -11,7 +11,8 @@ class Dashboard extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      jwtToken: sessionStorage.getItem("jwtToken")
+      jwtToken: sessionStorage.getItem("jwtToken"),
+      requests: []
     };
     this.onSubmit = this.onSubmit.bind(this);
     this.onChange = this.onChange.bind(this);
@@ -24,6 +25,11 @@ class Dashboard extends Component {
       if (res.success == false) {
         this.props.history.push("/login");
       }
+    });
+    axios.get("/getRequests").then(requests => {
+      this.setState({ ...this.state, requests: requests.data });
+      console.log(this.state.requests);
+      this.setState(this.state);
     });
   }
 
@@ -50,7 +56,12 @@ class Dashboard extends Component {
         <Titleboard />
         <div id="content">
           <Grid container justify="center">
-            <PostCard id="card1" />
+            {this.state.requests.map(request => (
+              <>
+                {console.log(request)}
+                <PostCard key={request.ID} info={request.data} id="card1" />
+              </>
+            ))}
           </Grid>
         </div>
       </div>
