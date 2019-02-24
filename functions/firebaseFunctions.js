@@ -64,6 +64,7 @@ firebaseFunctions.prototype = {
     });
   },
   createRequest(dataBlock) {
+      console.log(dataBlock.category)
     return new Promise(function(fulfill, reject) {
       db.collection("helpRequests")
         .add({
@@ -73,6 +74,7 @@ firebaseFunctions.prototype = {
           userID: dataBlock.userID,
           latitude: dataBlock.latitude,
           longitude: dataBlock.longitude,
+          category: dataBlock.category,
           finished: false,
           completedID: "",
           rank: 1
