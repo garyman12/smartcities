@@ -1,10 +1,10 @@
 const db = require("../config/firebase");
+var jwtFunctions = require("./jwtFunctions")
 var firebaseFunctions = function(){
 
 }
-
+var jwtInteractor = new jwtFunctions()
 firebaseFunctions.prototype = {
-
     createUser(dataBlock){
         return new Promise(function(fulfill, reject){
             console.log(dataBlock)
@@ -15,7 +15,8 @@ firebaseFunctions.prototype = {
             nameLast: dataBlock.nameLast,
             email: dataBlock.email,
             zipCode: dataBlock.zipCode,
-            password: dataBlock.password
+            password: dataBlock.password,
+            reward: 0
 
         }).then(function(docRef) {
             console.log(docRef)
@@ -34,8 +35,12 @@ firebaseFunctions.prototype = {
                 reject(JSON.stringify({success: false , redirect: "/login"}))
             }else{
             querySnapshot.forEach(function(doc) {
-                fulfill(JSON.stringify({success: true , redirect: "/dashboard"}))
-        });
+                userData = doc.data()
+                jwtInteractor.createToken({email: userData.email, userID: doc.id, nameFirst: userData.nameFirst}).then(function(result){
+                    fulfill(JSON.stringify({success: true , redirect: "/dashboard", jwtInfo: result}))
+                })
+                
+        })
     }
     }).catch(function(error){
         console.log(error)
@@ -91,7 +96,46 @@ firebaseFunctions.prototype = {
             fulfill(JSON.stringify({success: false, redirect: "/dashboard"}))
         })
     })
+    },
+    getInfo(userID){
+        return new Promise(function(fulfill, reject){
+        db.collection("users").doc(userID).get().then(function(result){
+            fulfill(result.data())
+        }).catch(function(error){
+            reject(JSON.stringify({success: false, redirect: "/dashboard"}))
+        })
+    })
+    },
+    getInfobyEmail(email){
+        console.log(email)
+        return new Promise(function(fulfill,reject){
+            db.collection("users").where("email", "==", email).get().then(function(querySnapshot){
+                querySnapshot.forEach(function(doc) {
+                    fulfill(JSON.stringify({data: doc.data(), id: doc.id}))
+                 })
+            }).catch(function(error){
+                reject(error)
+            })
+        })
+    },
+    getInfobyJWT(JWT){
+        return new Promise(function(fulfill, reject){
+            jwtInteractor.getPayload(JWT).then(function(result){
+                console.log(result.userID)
+                db.collection("users").doc(result.userID).get().then(function(doc){
+                    fulfill(doc.data())
+                }).catch(function(error){
+                    console.log(error)
+                    reject(JSON.stringify({success: false, redirect: "/dashboard"}))
+                })
+            }).catch(function(error){
+                console.log(error)
+                reject(JSON.stringify({success: false, redirect: "/dashboard"}))
+            })
+        })
     }
+
+
 
 }
 

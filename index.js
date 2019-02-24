@@ -67,5 +67,27 @@ app.post("/markComplete", (req, res) => {
         res.send(error)
     })
 })
+app.post("/getInfo", (req,res) =>{
+    console.log(req.body.userID)
+    firebaseInteractor.getInfo(req.body.userID).then(function(result){
+        res.send(result)
+    }).catch(function(error){
+        res.send(error)
+    })
+})
+app.post("/getInfoByEmail", (req,res)=>{
+    firebaseInteractor.getInfobyEmail(req.body.email).then(function(result){
+        res.send(result)
+    }).catch(function(error){
+        res.send(error)
+    })
+})
+app.post("/getInfobyJWT", (req,res) =>{
+    firebaseInteractor.getInfobyJWT(req.body.JWT).then(function(result){
+        res.send(result)
+    }).catch(function(error){
+        res.send(error)
+    })
+})
 
 app.listen(3001, () => console.log("Server Started on port 3001"));
