@@ -1,5 +1,4 @@
-import db from "../config/firebase";
-var ref = db.database().ref("users");
+const db = require("../config/firebase");
 var firebaseFunctions = function(){
 
 }
@@ -23,12 +22,21 @@ firebaseFunctions.prototype = {
     },
 
     authenticateUser(dataBlock){
-        ref.orderByChild('email').equalTo(dataBlock.email).on("value", function(snapshot) {
-            console.log(snapshot.val());
-            snapshot.forEach(function(data) {
-                console.log(data.key);
-            });
+        return new Promise(function(fulfill, reject){
+        db.collection("users").where("email", "==" , dataBlock.email).where("password", "==", dataBlock.password).get().then(function(querySnapshot) {
+            if(querySnapshot.docs.length == 0){
+                reject(JSON.stringify({success: false , redirect: "/login"}))
+            }else{
+            querySnapshot.forEach(function(doc) {
+                fulfill(JSON.stringify({success: true , redirect: "/dashboard"}))
         });
+    }
+    }).catch(function(error){
+        console.log(error)
+    })
+})
     }
 
 }
+
+module.exports = firebaseFunctions;
