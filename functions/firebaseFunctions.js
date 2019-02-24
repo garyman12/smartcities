@@ -193,6 +193,7 @@ firebaseFunctions.prototype = {
   },
   getInfobyJWT(JWT) {
     return new Promise(function(fulfill, reject) {
+        var completed = new Array()
       jwtInteractor
         .getPayload(JWT)
         .then(function(result) {
@@ -201,9 +202,15 @@ firebaseFunctions.prototype = {
             .doc(result.userID)
             .get()
             .then(function(doc) {
-              fulfill(
-                JSON.stringify({ success: true, data: doc.data(), ID: doc.id })
-              );
+                db.collection("helpRequests").where("completedID", "==", result.userID).get().then(function(querySnapshot) {
+                    querySnapshot.forEach(function(results) {
+                      completed.push(results.id)
+                    });
+                  }).then(function(){
+                    fulfill(
+                        JSON.stringify({ success: true, data: doc.data(), ID: doc.id, completedTasks: completed })
+                      );
+                  })
             })
             .catch(function(error) {
               console.log(error);

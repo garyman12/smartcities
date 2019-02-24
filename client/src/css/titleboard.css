@@ -110,7 +110,7 @@ body {
 .submit-btn {
     position: fixed;
     right: 5vh; 
-    z-index: 1100; 
+    z-index: 0; 
     font-size: 12px;
     text-align: center;
     vertical-align: middle;
