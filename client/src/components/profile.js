@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "../css/dashboard.css";
+import "../css/profile.css";
 import Titleboard from "./titleboard";
 
 import axios from "axios";
@@ -8,8 +8,8 @@ class Profile extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: "",
-      password: ""
+      nameFirst: "Nathan",
+      nameLast: "Rogers"
     };
     this.onSubmit = this.onSubmit.bind(this);
     this.onChange = this.onChange.bind(this);
@@ -39,6 +39,13 @@ class Profile extends Component {
     return (
       <div className="App">
         <Titleboard />
+        <div className="profile">
+          <div className="profile-head">
+            <h2 className="profile-name">
+              {this.state.nameFirst + " " + this.state.nameLast}
+            </h2>
+          </div>
+        </div>
       </div>
     );
   }
