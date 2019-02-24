@@ -11,13 +11,20 @@ class Dashboard extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      jwtToken: sessionStorage.getItem('jwtToken')
+      jwtToken: sessionStorage.getItem("jwtToken")
     };
     this.onSubmit = this.onSubmit.bind(this);
     this.onChange = this.onChange.bind(this);
   }
   componentWillMount() {
     window.sessionStorage.removeItem("redirect");
+    axios.post("/getInfobyJWT", this.state).then(res => {
+      res = res.data;
+      console.log(res);
+      if (res.success == false) {
+        this.props.history.push("/login");
+      }
+    });
   }
 
   onChange(e) {
@@ -38,14 +45,6 @@ class Dashboard extends Component {
   }
 
   render() {
-
-    axios.post("/getInfobyJWT", this.state).then(res => {
-      res = res.data;
-      console.log(res);
-      if(res.success == false){
-        this.props.history.push('/login');
-      }
-    });
     return (
       <div className="dashboard">
         <Titleboard />
