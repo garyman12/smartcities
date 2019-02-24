@@ -3,7 +3,9 @@ import Titleboard from "./titleboard";
 import axios from "axios";
 import "../css/postDetails.css";
 import Grid from "@material-ui/core/Grid";
-import Maps from "./maps";
+import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
+import { Z_FIXED } from "zlib";
+
 
 class PostDetails extends Component {
   constructor(props) {
@@ -11,7 +13,8 @@ class PostDetails extends Component {
     this.state = {
       jwtToken: sessionStorage.getItem("jwtToken"),
       id: this.props.match.params.id,
-      info: {}
+      info: {},
+      selectedPlace: "Place"
     };
   }
   componentWillMount() {
@@ -43,6 +46,7 @@ class PostDetails extends Component {
             src={this.state.info.image}
             className="spacing"
             alt="idk"
+            style={{maxWidth: '100%'}}
           />
         </Grid>
         <Grid container className="detail-grid" justify="center">
@@ -51,7 +55,19 @@ class PostDetails extends Component {
           </p>
         </Grid>
         <Grid container className="detail-grid" justify="center">
-          <Maps className="spacing" />
+          <Map 
+            google={this.props.google} 
+            zoom={14} 
+            style={{ height: '20vh', position: 'relative', width: '100%' }}
+          >
+            <Marker onClick={this.onMarkerClick}
+            name={'Current location'} />
+            <InfoWindow onClose={this.onInfoWindowClose}>
+              <div>
+                <h1>{this.state.selectedPlace.name}</h1>
+              </div>
+            </InfoWindow>
+          </Map>
         </Grid>
         <Grid container className="detail-grid" justify="center">
           <div className="container-login100-form-btn">
@@ -66,4 +82,6 @@ class PostDetails extends Component {
   }
 }
 
-export default PostDetails;
+export default GoogleApiWrapper({
+  apiKey: ("AIzaSyATxm8bDLqjEVPHa4X0gaRYUGjXlrKu0bI")
+})(PostDetails)

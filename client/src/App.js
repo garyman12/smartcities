@@ -7,7 +7,6 @@ import Titleboard from "./components/titleboard";
 import CreateRequest from "./components/createRequest";
 import PostDetails from "./components/postDetails";
 import Profile from "./components/profile";
-import Maps from "./components/maps";
 
 class App extends Component {
   render() {
@@ -28,7 +27,6 @@ const Content = () => (
     <Route exact path="/createRequest" component={CreateRequest} />
     <Route exact path="/postDetails/:id" component={PostDetails} />
     <Route exact path="/profile" component={Profile} />
-    <Route exact path="/maps" component={Maps} />
   </Switch>
 );
 

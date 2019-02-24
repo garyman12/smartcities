@@ -1,5 +1,8 @@
 .spacing {
     margin: 1vh;
-
 }
 
+.map-style {
+    width: 50%;
+    height: 50%;
+}
