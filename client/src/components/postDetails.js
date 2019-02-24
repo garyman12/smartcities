@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "../css/postDetails.css";
 import Titleboard from "./titleboard";
 import Grid from "@material-ui/core/Grid";
+import Maps from "./maps";
 
 import axios from "axios";
 
@@ -44,6 +45,7 @@ class PostDetails extends Component {
             <h1 id="content-title">yeet</h1>
             <img id="content-img"></img>
             <p id="content-desc"></p>
+            <Maps />
           </Grid>
         </div>
       </div>
