@@ -7,7 +7,6 @@ const uuidv4 = require("uuid/v4");
 const app = express();
 
 var firebaseInteractor = new firebaseFunction();
-var jwtInteractor = new jwtFunctions();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -17,9 +16,11 @@ app.post("/login", (req, res) => {
   firebaseInteractor
     .authenticateUser(req.body)
     .then(function(result) {
+    console.log(result)
       res.send(result);
     })
     .catch(function(error) {
+        console.log(error)
       res.send(error);
     });
 });
@@ -58,5 +59,13 @@ app.get("/getRequests", (req, res) => {
       console.log(error);
     });
 });
+
+app.post("/markComplete", (req, res) => {
+    firebaseInteractor.markComplete(req.body).then(function(result){
+        res.send(result)
+    }).catch(function(error){
+        res.send(error)
+    })
+})
 
 app.listen(3001, () => console.log("Server Started on port 3001"));

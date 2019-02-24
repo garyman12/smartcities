@@ -78,6 +78,19 @@ firebaseFunctions.prototype = {
                 reject(error)
             })
         })
+    },
+    markComplete(dataBlock){
+        return new Promise(function(fulfill, reject){
+
+        db.collection("helpRequests").doc(dataBlock.docID).update({
+            finished: true,
+            completedID: dataBlock.completedBy
+        }).then(function(){
+            fulfill(JSON.stringify({success: true, redirect: "/dashboard"}))
+        }).catch(function(error){
+            fulfill(JSON.stringify({success: false, redirect: "/dashboard"}))
+        })
+    })
     }
 
 }
