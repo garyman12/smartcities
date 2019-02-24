@@ -63,10 +63,10 @@ firebaseFunctions.prototype = {
     
             }).then(function(docRef) {
                 console.log(docRef)
-                fulfill(JSON.stringify({success: true, redirect: "/login" }))
+                fulfill(JSON.stringify({success: true, redirect: "/" }))
             }).catch(function(error){
                 console.log(error)
-                reject(JSON.stringify({success: false, redirect: "/register"}))
+                reject(JSON.stringify({success: false, redirect: "/"}))
             })
     })
     },
