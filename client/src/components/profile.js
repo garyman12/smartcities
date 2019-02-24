@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-class App extends Component {
+class Profile extends Component {
     onSubmit(e) {
         e.preventDefault();
         console.log(this.state);
