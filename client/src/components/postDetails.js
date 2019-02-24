@@ -3,9 +3,8 @@ import Titleboard from "./titleboard";
 import axios from "axios";
 import "../css/postDetails.css";
 import Grid from "@material-ui/core/Grid";
-import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
+import { Map, InfoWindow, Marker, GoogleApiWrapper } from "google-maps-react";
 import { Z_FIXED } from "zlib";
-
 
 class PostDetails extends Component {
   constructor(props) {
@@ -24,7 +23,6 @@ class PostDetails extends Component {
       info = info.data.data;
       this.setState({ ...this.state, info });
       this.setState(this.state);
-      console.log(this.state);
     });
   }
 
@@ -34,38 +32,36 @@ class PostDetails extends Component {
 
   onSubmit(e) {
     e.preventDefault();
-    console.log(this.state)
     axios
       .post("/markComplete", {
         jwtToken: this.state.jwtToken,
         id: this.state.id
       })
       .then(res => {
-        console.log(res.body);
-        this.props.history.push('/');
+        this.props.history.push("/");
       });
   }
 
   onMarkerClick = (props, marker) =>
-  this.setState({
-    activeMarker: marker,
-    selectedPlace: props,
-    showingInfoWindow: true
-  });
+    this.setState({
+      activeMarker: marker,
+      selectedPlace: props,
+      showingInfoWindow: true
+    });
 
-onInfoWindowClose = () =>
-  this.setState({
-    activeMarker: null,
-    showingInfoWindow: false
-  });
-
-onMapClicked = () => {
-  if (this.state.showingInfoWindow)
+  onInfoWindowClose = () =>
     this.setState({
       activeMarker: null,
       showingInfoWindow: false
     });
-};
+
+  onMapClicked = () => {
+    if (this.state.showingInfoWindow)
+      this.setState({
+        activeMarker: null,
+        showingInfoWindow: false
+      });
+  };
 
   render() {
     return (
@@ -82,7 +78,7 @@ onMapClicked = () => {
             src={this.state.info.image}
             className="spacing"
             alt="idk"
-            style={{maxWidth: '100%'}}
+            style={{ maxWidth: "100%" }}
           />
         </Grid>
         <Grid container className="detail-grid" justify="center">
@@ -91,20 +87,17 @@ onMapClicked = () => {
           </p>
         </Grid>
         <Grid container className="detail-grid" justify="center">
-          <Map 
-            google={this.props.google} 
-            zoom={14} 
+          <Map
+            google={this.props.google}
+            zoom={14}
             className="map"
-            style={{height: "50vh", width: "100%"}}
-          >
-            <Marker onClick={this.onMarkerClick}
-            name={'Current location'} />
-            <InfoWindow onClose={this.onInfoWindowClose}>
-              <div>
-                <h1>{this.state.selectedPlace.name}</h1>
-              </div>
-            </InfoWindow>
-          </Map>
+            info={{
+              title: this.state.info.title,
+              lat: this.state.info.latitude,
+              lng: this.state.info.longitude
+            }}
+            style={{ height: "50vh", width: "100%" }}
+          />
         </Grid>
         <form onSubmit={this.onSubmit}>
           <Grid container className="detail-grid" justify="center">
@@ -124,5 +117,5 @@ onMapClicked = () => {
 }
 
 export default GoogleApiWrapper({
-  apiKey: ("AIzaSyATxm8bDLqjEVPHa4X0gaRYUGjXlrKu0bI")
-})(PostDetails)
+  apiKey: "AIzaSyATxm8bDLqjEVPHa4X0gaRYUGjXlrKu0bI"
+})(PostDetails);
