@@ -5,6 +5,10 @@ import Signup from "./components/signup";
 import Dashboard from "./components/dashboard";
 import Titleboard from "./components/titleboard";
 import CreateRequest from "./components/createRequest";
+import PostDetails from "./components/postDetails";
+import Maps from "./components/maps";
+
+
 class App extends Component {
   render() {
     return (
@@ -22,6 +26,8 @@ const Content = () => (
     <Route exact path="/" component={Dashboard} />
     <Route exact path="/titleboard" component={Titleboard} />
     <Route exact path="/createRequest" component={CreateRequest} />
+    <Route exact path="/postDetails" component={PostDetails} />
+    <Route exact path="/maps" component={Maps} />
   </Switch>
 );
 

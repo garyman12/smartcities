@@ -127,7 +127,7 @@ class CreateRequest extends Component {
             value={this.state.description}
             onChange={this.onChange}
             multiline={true}
-            rows={4}
+            rows={1}
             rowsMax={Infinity}
           />
         );
