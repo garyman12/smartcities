@@ -51,13 +51,33 @@ firebaseFunctions.prototype = {
             title: dataBlock.title,
             image: dataBlock.image,
             userID: dataBlock.userID,
-            location: dataBlock.location
+            location: dataBlock.location,
+            finished: false,
+            completedID: "",
+            rank: 1
+
         }).then(function(result){
             fulfill(JSON.stringify({success: true, redirect: "/dashboard"}))
         }).catch(function(error){
             reject(JSON.stringify({success: false, redirect: "/dashboard"}))
         })
     })
+    },
+    getRequests(){
+        return new Promise(function(fulfill, reject){
+            results = new Array()
+            db.collection("helpRequests").where("finished", "==", false).get()
+            .then(function(querySnapshot){
+                querySnapshot.forEach(function(doc) {
+                    console.log(doc.data())
+                    results.push(doc.data())
+                 })
+            }).then(function(){
+                fulfill(results)
+            }).catch(function(error){
+                reject(error)
+            })
+        })
     }
 
 }

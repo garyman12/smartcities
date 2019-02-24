@@ -40,5 +40,14 @@ app.post('/register' , (req,res) =>{
     })
 });
 
+app.get('/getRequests', (req,res) =>{
+    firebaseInteractor.getRequests().then(function(result){
+        console.log(result)
+        res.send(result)
+    }).catch(function(error){
+        console.log(error);
+    })
+})
+
 
 app.listen(3001, () => console.log('Server Started on port 3001'))
