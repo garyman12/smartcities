@@ -6,3 +6,65 @@
     width: 50%;
     height: 50%;
 }
+
+/*------------------------------------------------------------------
+[ Button ]*/
+.postdetails .container-login100-form-btn {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-top: 13px;
+  }
+  
+.postdetails .wrap-login100-form-btn {
+    width: 100%;
+    display: block;
+    position: relative;
+    z-index: 1;
+    border-radius: 25px;
+    overflow: hidden;
+    margin: 0 auto;
+  }
+  
+.postdetails .login100-form-bgbtn {
+    position: static;
+    z-index: -1;
+    width: 300%;
+    height: 100%;
+    background: rgb(79,184,255);
+    background: linear-gradient(90deg, rgba(79,184,255,1) 31%, rgba(0,151,255,1) 87%);
+    top: 0;
+    left: -100%;
+  
+    -webkit-transition: all 0.4s;
+    -o-transition: all 0.4s;
+    -moz-transition: all 0.4s;
+    transition: all 0.4s;
+  }
+  
+.postdetails .login100-form-btn {
+    font-family: 'Open Sans';
+    font-size: 15px;
+    color: #fff;
+    line-height: 1.2;
+    text-transform: uppercase;
+  
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 20px;
+    width: 100%;
+    height: 50px;
+  }
+  
+.postdetails .wrap-login100-form-btn:hover .login100-form-bgbtn {
+    left: 0;
+  }

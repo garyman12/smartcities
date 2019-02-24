@@ -310,7 +310,7 @@ iframe {
 }
 
 .login100-form-bgbtn {
-  position: fixed;
+  position: absolute;
   z-index: -1;
   width: 300%;
   height: 100%;
