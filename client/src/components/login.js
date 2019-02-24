@@ -90,7 +90,7 @@ class Login extends Component {
 
                 <div className="text-center p-t-115">
                   <span className="txt1">Don’t have an account?</span>
-
+                  <br/>
                   <a className="txt2" href="/signup">
                     Sign Up
                   </a>

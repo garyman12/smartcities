@@ -16,9 +16,9 @@ class App extends Component {
 
 const Content = () => (
   <Switch>
-    <Route exact path="/" component={Login} />
+    <Route exact path="/login" component={Login} />
     <Route exact path="/signup" component={Signup} />
-    <Route exact path="/dashboard" component={Dashboard} />
+    <Route exact path="/" component={Dashboard} />
     <Route exact path="/titleboard" component={Titleboard} />
   </Switch>
 );

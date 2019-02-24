@@ -18,7 +18,9 @@ body {
   
   /* Color/shape of burger icon bars on hover*/
 .bm-burger-bars-hover {
-    background: #4fb8ff;
+    background: #6a7dfe;
+    background: rgb(79,184,255);
+    background: linear-gradient(90deg, rgba(79,184,255,1) 31%, rgba(0,151,255,1) 87%);
 }
   
   /* Position and sizing of clickable cross button */
@@ -43,9 +45,9 @@ body {
   
   /* General sidebar styles */
 .bm-menu {
-    background: #373a47;
-    padding: 2.5em 1.5em 0;
-    font-size: 1.15em;
+    background: #f2f2f2;
+    padding: 2vh;
+    font-size: 50px;
 }
   
   /* Morph shape necessary with bubble or elastic */
@@ -67,6 +69,18 @@ body {
   /* Styling of overlay */
 .bm-overlay {
     background: rgba(0, 0, 0, 0.3);
+}
+
+.menu-item {
+    font-size: 30px;
+    text-decoration: none;
+}
+
+.menu-item:hover {
+    text-decoration: none;
+    color: #6a7dfe;
+    color: rgb(79,184,255);
+    color: linear-gradient(90deg, rgba(79,184,255,1) 31%, rgba(0,151,255,1) 87%);
 }
 
 .titlebar {
