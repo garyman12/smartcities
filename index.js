@@ -68,6 +68,13 @@ app.post("/markComplete", (req, res) => {
         res.send(error)
     })
 })
+app.post("/getRequestInfo", (req,res) =>{
+    firebaseInteractor.getExactRequest(req.body.reqID).then(function(result){
+        res.send(result)
+    }).catch(function(error){
+        res.send(error)
+    })
+})
 app.post("/getInfo", (req,res) =>{
     console.log(req.body.userID)
     firebaseInteractor.getInfo(req.body.userID).then(function(result){
