@@ -155,6 +155,13 @@ class Signup extends Component {
                     </button>
                   </div>
                 </div>
+                <div className="text-center p-t-11">
+                  <span className="txt1">Already have an account?</span>
+                  <br/>
+                  <a className="txt2" href="/login">
+                    Login
+                  </a>
+                </div>
               </form>
             </div>
           </div>

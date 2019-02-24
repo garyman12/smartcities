@@ -40,7 +40,7 @@ class Login extends Component {
                 onSubmit={this.onSubmit}
                 className="login100-form validate-form"
               >
-                <span className="login100-form-title p-b-26">Welcome</span>
+                <span className="login100-form-title p-b-10">Welcome</span>
                 <span className="login100-form-title p-b-48">
                   <i className="zmdi zmdi-font" />
                 </span>
@@ -88,7 +88,7 @@ class Login extends Component {
                   </div>
                 </div>
 
-                <div className="text-center p-t-115">
+                <div className="text-center p-t-11">
                   <span className="txt1">Don’t have an account?</span>
                   <br/>
                   <a className="txt2" href="/signup">
