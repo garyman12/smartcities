@@ -41,7 +41,7 @@ class Titleboard extends Component {
         <div className="titlebar">
           <Menu>
             <a id="home" className="menu-item" href="/">Home</a>
-            <a id="about" className="menu-item" href="/post">Post</a>
+            <a id="about" className="menu-item" href="/createRequest">Post</a>
             <a id="contact" className="menu-item" onClick={ this.showSettings } href="/settings">Settings</a>
             <a id="logout"className="menu-item" href="/login">Logout</a>
           </Menu>
