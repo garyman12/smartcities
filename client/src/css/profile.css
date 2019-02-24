@@ -1,0 +1,13 @@
+#profile-title {
+  width: 800px;
+  margin-left: 5vw;
+  margin-right: 5vw;
+}
+
+@media (max-width: 720px) {
+  .profile-title {
+    max-width: 800px;
+    margin-left: 5vw;
+    margin-right: 5vw;
+  }
+}
