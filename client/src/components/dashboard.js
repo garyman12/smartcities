@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import "../css/dashboard.css";
+import "../css/card.css";
 import Titleboard from "./titleboard";
 import PostCard from "./card";
+import Grid from "@material-ui/core/Grid";
 
 import axios from "axios";
 
@@ -41,9 +43,9 @@ class Dashboard extends Component {
       <div className="dashboard">
         <Titleboard />
         <div id="content">
-          <div class="center">
+          <Grid container justify="center">
             <PostCard id="card1" />
-          </div>
+          </Grid>
         </div>
       </div>
     );

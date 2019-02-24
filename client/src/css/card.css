@@ -1,4 +1,9 @@
-.center {
-    float: none;
-    margin: 0 auto;
+.card {
+  margin: 5vh;
+}
+
+@media (max-width: 576px) {
+  .card {
+    margin: 5vw;
+  }
 }
