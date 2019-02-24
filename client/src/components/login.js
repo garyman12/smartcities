@@ -3,6 +3,7 @@ import "../css/login.css";
 import "../css/util.css";
 import axios from "axios";
 
+
 class Login extends Component {
   constructor(props) {
     super(props);
@@ -27,6 +28,11 @@ class Login extends Component {
     axios.post("/login", this.state).then(res => {
       res = res.data;
       console.log(res);
+      if(res.success == true){
+        sessionStorage.setItem("jwtToken", res.jwtInfo)
+      }else{
+        console.log("Error")
+      }
     });
   }
 

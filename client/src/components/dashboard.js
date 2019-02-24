@@ -11,8 +11,7 @@ class Dashboard extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: "",
-      password: ""
+      jwtToken: sessionStorage.getItem('jwtToken')
     };
     this.onSubmit = this.onSubmit.bind(this);
     this.onChange = this.onChange.bind(this);
@@ -39,6 +38,11 @@ class Dashboard extends Component {
   }
 
   render() {
+
+    axios.post("/getInfobyJWT", this.state).then(res => {
+      res = res.data;
+      console.log(res);
+    });
     return (
       <div className="dashboard">
         <Titleboard />

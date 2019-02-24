@@ -123,7 +123,7 @@ firebaseFunctions.prototype = {
             jwtInteractor.getPayload(JWT).then(function(result){
                 console.log(result.userID)
                 db.collection("users").doc(result.userID).get().then(function(doc){
-                    fulfill(doc.data())
+                    fulfill(JSON.stringify({success: true, data: doc.data()}))
                 }).catch(function(error){
                     console.log(error)
                     reject(JSON.stringify({success: false, redirect: "/dashboard"}))

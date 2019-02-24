@@ -67,7 +67,7 @@ app.post("/markComplete", (req, res) => {
         res.send(error)
     })
 })
-app.get("/getInfo", (req,res) =>{
+app.post("/getInfo", (req,res) =>{
     console.log(req.body.userID)
     firebaseInteractor.getInfo(req.body.userID).then(function(result){
         res.send(result)
@@ -75,15 +75,15 @@ app.get("/getInfo", (req,res) =>{
         res.send(error)
     })
 })
-app.get("/getInfoByEmail", (req,res)=>{
+app.post("/getInfoByEmail", (req,res)=>{
     firebaseInteractor.getInfobyEmail(req.body.email).then(function(result){
         res.send(result)
     }).catch(function(error){
         res.send(error)
     })
 })
-app.get("/getInfobyJWT", (req,res) =>{
-    firebaseInteractor.getInfobyJWT(req.body.JWT).then(function(result){
+app.post("/getInfobyJWT", (req,res) =>{
+    firebaseInteractor.getInfobyJWT(req.body.jwtToken).then(function(result){
         res.send(result)
     }).catch(function(error){
         res.send(error)
