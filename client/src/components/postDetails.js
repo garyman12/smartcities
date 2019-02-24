@@ -28,6 +28,18 @@ class PostDetails extends Component {
     event.preventDefault();
   }
 
+  onSubmit(e) {
+    e.preventDefault();
+    axios
+      .post("/markComplete", {
+        jwtToken: this.state.jwtToken,
+        id: this.state.id
+      })
+      .then(res => {
+        console.log(res.body);
+      });
+  }
+
   render() {
     return (
       <div className="postdetails">
@@ -53,14 +65,18 @@ class PostDetails extends Component {
         <Grid container className="detail-grid" justify="center">
           <Maps className="spacing" />
         </Grid>
-        <Grid container className="detail-grid" justify="center">
-          <div className="container-login100-form-btn">
-            <div className="wrap-login100-form-btn">
-              <div className="login100-form-bgbtn" />
-              <button className="login100-form-btn">Claim</button>
+        <form onSubmit={this.onSubmit}>
+          <Grid container className="detail-grid" justify="center">
+            <div className="container-login100-form-btn">
+              <div className="wrap-login100-form-btn">
+                <div className="login100-form-bgbtn" />
+                <button type="submit" className="login100-form-btn">
+                  Claim
+                </button>
+              </div>
             </div>
-          </div>
-        </Grid>
+          </Grid>
+        </form>
       </div>
     );
   }
