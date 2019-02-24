@@ -47,6 +47,11 @@ app.post("/register", (req, res) => {
       res.send(error);
     });
 });
+app.post("/getRequested", (req,res) =>{
+  firebaseInteractor.getPostedHelp(req.body.jwtToken).then(function(result){
+    fulfill(result)
+  })
+})
 
 app.get("/getRequests", (req, res) => {
   firebaseInteractor

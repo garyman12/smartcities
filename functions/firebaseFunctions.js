@@ -191,9 +191,28 @@ firebaseFunctions.prototype = {
         });
     });
   },
+
+  getPostedHelp(JWT){
+    return new Promise(function(fulfill, reject){
+        var requested = new Array()
+        jwtInteractor.getPayload(JWT).then(function(result){
+            var userID = result.userID
+            db.collection("helpRequests").where("finished", "==", false).where("userID", "==", userID).get().then(function(querySnapshot) {
+                querySnapshot.forEach(function(results) {
+                  requested.push({ ID: results.id, data: results.data() })
+                });
+              }).then(function(){
+                  fulfill(requested)
+              })
+        }).catch(function(error){
+            console.log(error)
+        })
+    })
+  },
   getInfobyJWT(JWT) {
     return new Promise(function(fulfill, reject) {
         var completed = new Array()
+        var requested = new Array()
       jwtInteractor
         .getPayload(JWT)
         .then(function(result) {
@@ -204,12 +223,18 @@ firebaseFunctions.prototype = {
             .then(function(doc) {
                 db.collection("helpRequests").where("completedID", "==", result.userID).get().then(function(querySnapshot) {
                     querySnapshot.forEach(function(results) {
-                      completed.push(results.id)
+                      completed.push({ ID: results.id, data: results.data() })
                     });
                   }).then(function(){
-                    fulfill(
-                        JSON.stringify({ success: true, data: doc.data(), ID: doc.id, completedTasks: completed })
-                      );
+                    db.collection("helpRequests").where("finished", "==", false).where("userID", "==", result.userID).get().then(function(querySnapshot) {
+                        querySnapshot.forEach(function(results) {
+                          requested.push({ ID: results.id, data: results.data() })
+                        });
+                      }).then(function(){
+                      fulfill(
+                          JSON.stringify({ success: true, data: doc.data(), ID: doc.id, completedTasks: completed, requestedTasks: requested })
+                        );
+                    })
                   })
             })
             .catch(function(error) {
