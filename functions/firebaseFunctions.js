@@ -59,7 +59,8 @@ firebaseFunctions.prototype = {
             location: dataBlock.location,
             finished: false,
             completedID: "",
-            rank: 1
+            rank: 1,
+            reward: 0
 
         }).then(function(result){
             fulfill(JSON.stringify({success: true, redirect: "/dashboard"}))
