@@ -56,7 +56,7 @@ firebaseFunctions.prototype = {
             title: dataBlock.title,
             image: dataBlock.image,
             userID: dataBlock.userID,
-            location: dataBlock.location,
+            location: new firebase.firestore.GeoPoint(dataBlock.latitude, dataBlock.longitude),
             finished: false,
             completedID: "",
             rank: 1,
@@ -86,11 +86,21 @@ firebaseFunctions.prototype = {
         })
     },
     markComplete(dataBlock){
+        var points
         return new Promise(function(fulfill, reject){
-
+        db.collection("users").doc(dataBlock.completedBy).get().then(function(result){
+            block = result.data()
+            console.log(block.reward)
+            points = block.reward
+        })
         db.collection("helpRequests").doc(dataBlock.docID).update({
             finished: true,
-            completedID: dataBlock.completedBy
+            completedID: dataBlock.completedBy,
+
+        }).then(function(){
+            db.collection("users").doc(dataBlock.completedBy).update({
+                reward: points + 10
+            })
         }).then(function(){
             fulfill(JSON.stringify({success: true, redirect: "/dashboard"}))
         }).catch(function(error){
