@@ -45,7 +45,7 @@ class Titleboard extends Component {
             <a id="contact" className="menu-item" onClick={ this.showSettings } href="/settings">Settings</a>
             <a id="logout"className="menu-item" href="/login">Logout</a>
           </Menu>
-          <a className="submit-btn">+</a>
+          <a className="submit-btn" href="/createRequest">+</a>
           <h1>Dashboard</h1>
         </div>
         <div className="invis"></div>
