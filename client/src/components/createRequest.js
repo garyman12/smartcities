@@ -11,6 +11,7 @@ import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
 import Titleboard from "./titleboard";
 import axios from "axios";
+import { geolocated } from "react-geolocated";
 import "../css/dashboard.css";
 
 import firebase from "../firebase";
@@ -39,10 +40,11 @@ class CreateRequest extends Component {
       title: "",
       description: "",
       activeStep: 0,
-      jwtToken: sessionStorage.getItem('jwtToken'),
+      jwtToken: sessionStorage.getItem("jwtToken"),
       imgURL: "",
       isUploading: false,
-      progress: 0
+      progress: 0,
+      userID: ""
     };
     this.onSubmit = this.onSubmit.bind(this);
     this.onChange = this.onChange.bind(this);
@@ -63,7 +65,19 @@ class CreateRequest extends Component {
   };
   onSubmit(e) {
     e.preventDefault();
-    console.log("Submitted");
+    var send = {
+      title: this.state.title,
+      description: this.state.description,
+      imgURL: this.state.imgURL,
+      userID: this.state.userID,
+      latitude: this.props.coords.latitude,
+      longitude: this.props.coords.longitude
+    };
+    console.log(send);
+    axios.post("/createRequest", send).then(res => {
+      res = res.data;
+      console.log(res);
+    });
   }
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value });
@@ -123,7 +137,7 @@ class CreateRequest extends Component {
             {this.state.isUploading && <p>Progress: {this.state.progress}</p>}
             {this.state.imgURL && <img src={this.state.imgURL} />}
             <FileUploader
-              accept="image/*"
+              accept="images/*"
               name="avatar"
               randomizeFilename
               storageRef={firebase.storage().ref("images")}
@@ -139,16 +153,19 @@ class CreateRequest extends Component {
     }
   }
 
-  render() {
-    const { classes } = this.props;
-    const steps = this.getSteps();
+  componentWillMount() {
     axios.post("/getInfobyJWT", this.state).then(res => {
       res = res.data;
-      console.log(res);
+      this.setState({ ...this.state, userID: res.ID });
       if (res.success == false) {
         this.props.history.push("/login");
       }
     });
+  }
+
+  render() {
+    const { classes } = this.props;
+    const steps = this.getSteps();
     return (
       <div className="App">
         <Titleboard />
@@ -214,4 +231,9 @@ CreateRequest.propTypes = {
   classes: PropTypes.object
 };
 
-export default withStyles(styles)(CreateRequest);
+export default geolocated({
+  positionOptions: {
+    enableHighAccuracy: true
+  },
+  userDecisionTimeout: 5000
+})(withStyles(styles)(CreateRequest));
