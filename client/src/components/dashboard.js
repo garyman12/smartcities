@@ -21,14 +21,12 @@ class Dashboard extends Component {
     window.sessionStorage.removeItem("redirect");
     axios.post("/getInfobyJWT", this.state).then(res => {
       res = res.data;
-      console.log(res);
       if (res.success == false) {
         this.props.history.push("/login");
       }
     });
     axios.get("/getRequests").then(requests => {
       this.setState({ ...this.state, requests: requests.data });
-      console.log(this.state.requests);
       this.setState(this.state);
     });
   }
@@ -42,7 +40,6 @@ class Dashboard extends Component {
     console.log(this.state);
     axios.post("/dashboard", this.state).then(res => {
       res = res.data;
-      console.log(res);
     });
   }
 
@@ -58,8 +55,7 @@ class Dashboard extends Component {
           <Grid container justify="center">
             {this.state.requests.map(request => (
               <>
-                {console.log(request)}
-                <PostCard key={request.ID} info={request.data} id="card1" />
+                <PostCard key={request.ID} info={request} id="card1" />
               </>
             ))}
           </Grid>
